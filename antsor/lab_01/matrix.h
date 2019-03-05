@@ -5,6 +5,6 @@
 
 void clear_matrix(double **a, int n);
 
-double **read_matrix(std::ifstream f);
+double **read_matrix(std::ifstream f, int *k);
 
 #endif // FILEIO_H

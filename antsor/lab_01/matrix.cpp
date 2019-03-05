@@ -7,24 +7,23 @@ void clear_matrix(double **a, int n)
 	delete [] plist;
 }
 
-double **read_matrix(std::ifstream f)
+double **read_matrix(std::ifstream f, int *k)
 {
-	int n;
 	double x, y;
 	double **plist = nullptr;
 	
-	std::cin >> n;
-	if (std::cin.fail())
+	std::cin >> *k;
+	if (std::cin.fail() || *k < 1)
 	{
 		std::cin.clear();
 		std::cin.ignore(32767,'\n');
 		return nullptr;
 	}
 	
-	plist = new double* [n];
+	plist = new double* [*k];
 	if (!plist)
 		return nullptr;
-	for (int i = 0; i < n; i++)
+	for (int i = 0; i < *k; i++)
 	{
 		plist[i] = new double [2];
 		if (!plist[i])
@@ -34,7 +33,7 @@ double **read_matrix(std::ifstream f)
 		}
 	}
 	
-	for (int i = 0; i < n; i++)
+	for (int i = 0; i < *k; i++)
 	{
 		std::cin >> x >> y;
 		if (std::cin.fail())

@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QLabel>
 
 namespace Ui {
 class MainWindow;
@@ -26,8 +27,16 @@ private slots:
 
 	void on_clearButton_released();
 	
+	void on_solveButton_released();
+	
 private:
     Ui::MainWindow *ui;
+	
+	double **plist;
+	int k;
+	void table_to_matrix();
 };
+
+void error_msg(QLabel *msgbox, int rc);
 
 #endif // MAINWINDOW_H

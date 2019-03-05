@@ -32,7 +32,8 @@ SOURCES += \
 HEADERS += \
         mainwindow.h \
     interpol.h \
-    matrix.h
+    matrix.h \
+    error.h
 
 FORMS += \
         mainwindow.ui
