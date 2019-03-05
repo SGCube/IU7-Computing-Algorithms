@@ -26,11 +26,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    interpol.cpp
+    interpol.cpp \
+    matrix.cpp
 
 HEADERS += \
         mainwindow.h \
-    interpol.h
+    interpol.h \
+    matrix.h
 
 FORMS += \
         mainwindow.ui
