@@ -7,28 +7,27 @@
 
 int main(int argc, char *argv[])
 {
-	setbuf(stdout, NULL);
+	double a, b;
 	FILE *fin = NULL;
-	if (argc < 2)
+	
+	setbuf(stdout, NULL);
+	
+	printf("y(x) = cos(x) - x\n");
+	printf("Enter a, b: ");
+	if (scanf("%lf%lf", &a, &b) != 2 || a == b)
 	{
-		file_func(-2, 2, 10);
-		fin = fopen("data.txt", "r");
-		if (!fin)
-		{
-			printf("Can't open file!\n");
-			return 0;
-		}
+		printf("Read error!\n");
+		return 0;
 	}
-	else
+	file_func(a, b, b - a);
+	
+	fin = fopen("data.txt", "r");
+	if (!fin)
 	{
-		fin = fopen(argv[1], "r");
-		if (!fin)
-		{
-			printf("Can't open file!\n");
-			return 0;
-		}
-
+		printf("Can't open file!\n");
+		return 0;
 	}
+	
 	int k = 0;
 	double x = 0;
 	int n = 0;

@@ -5,7 +5,7 @@
 
 double func(double x)
 {
-	return x * x + 2;
+	return cos(x) - x;
 }
 
 void file_func(double a, double b, int n)
@@ -16,12 +16,12 @@ void file_func(double a, double b, int n)
 		if (!f)
 			return;
 		
-		fprintf("%d\n", n);
+		fprintf(f, "%d\n", n);
 		
 		double h = (b - a) / n;
 		while (a <= b + h)
 		{
-			fprintf("%lf %lf\n", a, func(a));
+			fprintf(f, "%lf %lf\n", a, func(a));
 			a += h;
 		}
 		

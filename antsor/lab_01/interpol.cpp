@@ -32,8 +32,8 @@ double **surround(double **plist, double x, int n, int k)
     for (int i = left; i <= right; i++)
     {
         parr[i] = new double [2];
-        parr[i][0] = parr[i][0];
-        parr[i][1] = parr[i][1];
+        parr[i][0] = plist[i][0];
+        parr[i][1] = plist[i][1];
     }
     return parr;
 }
@@ -49,17 +49,19 @@ double newton(double x, int n, double **parr)
 
     for (int i = 1; i < n + 1; i++)
         for (int j = 0; j < n + 1 - i; j++)
+		{
             dy[j][i] = (dy[j][i - 1] - dy[j + 1][i - 1]) /
                     (parr[j][0] - parr[j + i][0]);
+		}
 
     double res = dy[0][0];
     double xpr = 1;
     for (int i = 1; i < n + 1; i++)
     {
         xpr *= x - parr[i - 1][0];
-        res += dy[i][0] * xpr;
+        res += dy[0][i] * xpr;
     }
-
+	
     delete [] dy;
 	clear_matrix(parr, n);
 

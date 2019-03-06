@@ -1,10 +1,13 @@
-#ifndef FILEIO_H
-#define FILEIO_H
+#ifndef MATRIX_H
+#define MATRIX_H
 
-#include <cstdio>
+#include <stdio.h>
 
 void clear_matrix(double **a, int n);
 
 double **read_matrix(FILE *f, int *k);
 
-#endif // FILEIO_H
+
+void print_matrix(double **plist, int k);
+
+#endif // MATRIX_H

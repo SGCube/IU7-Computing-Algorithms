@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="lab_01"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="msvc8"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="D:/Programming/iu7-compalg-labs-2019/antsor/lab_01/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f D:\Programming\iu7-compalg-labs-2019\antsor\lab_01\cmake-build-debug\Makefile VERBOSE=1 all"/>
+					<CompileFile command="nmake /NOLOGO /f D:\Programming\iu7-compalg-labs-2019\antsor\lab_01\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f D:\Programming\iu7-compalg-labs-2019\antsor\lab_01\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f D:\Programming\iu7-compalg-labs-2019\antsor\lab_01\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="lab_01">
+				<Option output="D:/Programming/iu7-compalg-labs-2019/antsor/lab_01/cmake-build-debug/lab_01.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/Programming/iu7-compalg-labs-2019/antsor/lab_01/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="msvc8"/>
+				<Compiler>
+					<Add directory="D:/Programming/iu7-compalg-labs-2019/antsor/lab_01/."/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.16299.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.16299.0\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.16299.0\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.16299.0\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.16299.0\cppwinrt"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f D:\Programming\iu7-compalg-labs-2019\antsor\lab_01\cmake-build-debug\Makefile VERBOSE=1 lab_01"/>
+					<CompileFile command="nmake /NOLOGO /f D:\Programming\iu7-compalg-labs-2019\antsor\lab_01\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f D:\Programming\iu7-compalg-labs-2019\antsor\lab_01\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f D:\Programming\iu7-compalg-labs-2019\antsor\lab_01\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="lab_01/fast">
+				<Option output="D:/Programming/iu7-compalg-labs-2019/antsor/lab_01/cmake-build-debug/lab_01.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/Programming/iu7-compalg-labs-2019/antsor/lab_01/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="msvc8"/>
+				<Compiler>
+					<Add directory="D:/Programming/iu7-compalg-labs-2019/antsor/lab_01/."/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.16299.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.16299.0\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.16299.0\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.16299.0\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.16299.0\cppwinrt"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f D:\Programming\iu7-compalg-labs-2019\antsor\lab_01\cmake-build-debug\Makefile VERBOSE=1 lab_01/fast"/>
+					<CompileFile command="nmake /NOLOGO /f D:\Programming\iu7-compalg-labs-2019\antsor\lab_01\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f D:\Programming\iu7-compalg-labs-2019\antsor\lab_01\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f D:\Programming\iu7-compalg-labs-2019\antsor\lab_01\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="D:/Programming/iu7-compalg-labs-2019/antsor/lab_01/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f D:\Programming\iu7-compalg-labs-2019\antsor\lab_01\cmake-build-debug\Makefile VERBOSE=1 edit_cache"/>
+					<CompileFile command="nmake /NOLOGO /f D:\Programming\iu7-compalg-labs-2019\antsor\lab_01\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f D:\Programming\iu7-compalg-labs-2019\antsor\lab_01\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f D:\Programming\iu7-compalg-labs-2019\antsor\lab_01\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="D:/Programming/iu7-compalg-labs-2019/antsor/lab_01/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f D:\Programming\iu7-compalg-labs-2019\antsor\lab_01\cmake-build-debug\Makefile VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="nmake /NOLOGO /f D:\Programming\iu7-compalg-labs-2019\antsor\lab_01\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f D:\Programming\iu7-compalg-labs-2019\antsor\lab_01\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f D:\Programming\iu7-compalg-labs-2019\antsor\lab_01\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="D:/Programming/iu7-compalg-labs-2019/antsor/lab_01/data.txt">
+			<Option target="lab_01"/>
+		</Unit>
+		<Unit filename="D:/Programming/iu7-compalg-labs-2019/antsor/lab_01/error.h">
+			<Option target="lab_01"/>
+		</Unit>
+		<Unit filename="D:/Programming/iu7-compalg-labs-2019/antsor/lab_01/func.cpp">
+			<Option target="lab_01"/>
+		</Unit>
+		<Unit filename="D:/Programming/iu7-compalg-labs-2019/antsor/lab_01/func.h">
+			<Option target="lab_01"/>
+		</Unit>
+		<Unit filename="D:/Programming/iu7-compalg-labs-2019/antsor/lab_01/interpol.cpp">
+			<Option target="lab_01"/>
+		</Unit>
+		<Unit filename="D:/Programming/iu7-compalg-labs-2019/antsor/lab_01/interpol.h">
+			<Option target="lab_01"/>
+		</Unit>
+		<Unit filename="D:/Programming/iu7-compalg-labs-2019/antsor/lab_01/main.cpp">
+			<Option target="lab_01"/>
+		</Unit>
+		<Unit filename="D:/Programming/iu7-compalg-labs-2019/antsor/lab_01/makefile">
+			<Option target="lab_01"/>
+		</Unit>
+		<Unit filename="D:/Programming/iu7-compalg-labs-2019/antsor/lab_01/matrix.cpp">
+			<Option target="lab_01"/>
+		</Unit>
+		<Unit filename="D:/Programming/iu7-compalg-labs-2019/antsor/lab_01/matrix.h">
+			<Option target="lab_01"/>
+		</Unit>
+		<Unit filename="D:/Programming/iu7-compalg-labs-2019/antsor/lab_01/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

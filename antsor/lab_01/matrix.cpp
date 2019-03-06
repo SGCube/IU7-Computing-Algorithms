@@ -12,7 +12,7 @@ double **read_matrix(FILE *f, int *k)
 	double x, y;
 	double **plist = nullptr;
 
-	if (fscanf("%d", k) != 1 || *k < 1)
+	if (fscanf(f, "%d", k) != 1 || *k < 1)
 		return nullptr;
 	
 	plist = new double* [*k];
@@ -30,7 +30,7 @@ double **read_matrix(FILE *f, int *k)
 	
 	for (int i = 0; i < *k; i++)
 	{
-		if (fscanf("%lf%lf", &x, &y) != 2)
+		if (fscanf(f, "%lf%lf", &x, &y) != 2)
 		{
 			clear_matrix(plist, *k);
 			return nullptr;
@@ -39,4 +39,11 @@ double **read_matrix(FILE *f, int *k)
 		plist[i][1] = y;
 	}
 	return plist;
+}
+
+void print_matrix(double **plist, int k)
+{
+	if (plist)
+		for (int i = 0; i < k; i++)
+			printf("%.3lf\t|%.3lf\n", plist[i][0], plist[i][1]);
 }

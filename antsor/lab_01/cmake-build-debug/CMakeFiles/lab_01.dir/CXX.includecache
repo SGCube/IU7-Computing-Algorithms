@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/Programming/iu7-compalg-labs-2019/antsor/lab_01/error.h
+
+D:/Programming/iu7-compalg-labs-2019/antsor/lab_01/func.h
+
+D:/Programming/iu7-compalg-labs-2019/antsor/lab_01/interpol.h
+
+D:/Programming/iu7-compalg-labs-2019/antsor/lab_01/main.cpp
+stdio.h
+-
+interpol.h
+D:/Programming/iu7-compalg-labs-2019/antsor/lab_01/interpol.h
+matrix.h
+D:/Programming/iu7-compalg-labs-2019/antsor/lab_01/matrix.h
+error.h
+D:/Programming/iu7-compalg-labs-2019/antsor/lab_01/error.h
+func.h
+D:/Programming/iu7-compalg-labs-2019/antsor/lab_01/func.h
+
+D:/Programming/iu7-compalg-labs-2019/antsor/lab_01/matrix.h
+cstdio
+-
+
