@@ -2,15 +2,16 @@
 #include <stdlib.h>
 
 #include "interpol.h"
+#include "matrix.h"
 
-int cmp_point_x(void *p1, void *p2)
+int cmp_point_x(const void *p1, const void *p2)
 {
     double *pa = (double *)p1;
     double *pb = (double *)p2;
     return pa[0] - pb[0];
 }
 
-double **surround(double plist[][2], double x, int n, int k)
+double **surround(double **plist, double x, int n, int k)
 {
     double **parr = NULL;
     int i = 0;
@@ -37,7 +38,7 @@ double **surround(double plist[][2], double x, int n, int k)
     return parr;
 }
 
-double newton(double x, int n, double *parr)
+double newton(double x, int n, double **parr)
 {
     double **dy = new double* [n];
     for (int i = 0; i < n + 1; i++)
@@ -60,14 +61,15 @@ double newton(double x, int n, double *parr)
     }
 
     delete [] dy;
+	clear_matrix(parr, n);
 
     return res;
 }
 
-double solve(double plist[][2], double x, int n, int k)
+double solve(double **plist, double x, int n, int k)
 {
     qsort(plist, k, sizeof(double *), cmp_point_x);
-    parr = surround(plist, x, n, k);
+    double **parr = surround(plist, x, n, k);
     if (parr)
         return newton(x, n, parr);
     return -1;

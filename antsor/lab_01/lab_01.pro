@@ -27,13 +27,15 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     interpol.cpp \
-    matrix.cpp
+    matrix.cpp \
+    func.cpp
 
 HEADERS += \
         mainwindow.h \
     interpol.h \
     matrix.h \
-    error.h
+    error.h \
+    func.h
 
 FORMS += \
         mainwindow.ui

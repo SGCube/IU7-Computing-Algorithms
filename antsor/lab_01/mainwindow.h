@@ -29,12 +29,15 @@ private slots:
 	
 	void on_solveButton_released();
 	
+	void on_loadButton_released();
+	
 private:
     Ui::MainWindow *ui;
 	
 	double **plist;
 	int k;
 	void table_to_matrix();
+	void matrix_to_table();
 };
 
 void error_msg(QLabel *msgbox, int rc);

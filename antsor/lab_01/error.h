@@ -7,5 +7,6 @@
 #define ERR_VAL_X -3
 #define ERR_VAL_Y -4
 #define ERR_VAL_N -5
+#define ERR_FILE -6
 
 #endif // ERROR_H
