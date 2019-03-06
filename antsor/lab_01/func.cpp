@@ -1,7 +1,5 @@
 #include <cmath>
-#include <iostream>
-#include <fstream>
-using namespace std;
+#include <cstdio>
 
 #include "func.h"
 
@@ -14,20 +12,19 @@ void file_func(double a, double b, int n)
 {
 	if (n > 0)
 	{
-		ofstream f;
-		f.open("data.txt");
-		if (!f.is_open())
+		FILE *f = fopen("data.txt", "w");
+		if (!f)
 			return;
 		
-		f << n << endl;
+		fprintf("%d\n", n);
 		
 		double h = (b - a) / n;
 		while (a <= b + h)
 		{
-			f << a << func(a) << endl;
+			fprintf("%lf %lf\n", a, func(a));
 			a += h;
 		}
 		
-		f.close();
+		fclose(f);
 	}
 }

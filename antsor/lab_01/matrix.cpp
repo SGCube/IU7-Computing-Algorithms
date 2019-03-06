@@ -7,13 +7,12 @@ void clear_matrix(double **a, int n)
 	delete [] a;
 }
 
-double **read_matrix(ifstream &f, int *k)
+double **read_matrix(FILE *f, int *k)
 {
 	double x, y;
 	double **plist = nullptr;
-	
-	f >> *k;
-	if (f.fail() || *k < 1)
+
+	if (fscanf("%d", k) != 1 || *k < 1)
 		return nullptr;
 	
 	plist = new double* [*k];
@@ -31,8 +30,7 @@ double **read_matrix(ifstream &f, int *k)
 	
 	for (int i = 0; i < *k; i++)
 	{
-		f >> x >> y;
-		if (f.fail())
+		if (fscanf("%lf%lf", &x, &y) != 2)
 		{
 			clear_matrix(plist, *k);
 			return nullptr;
