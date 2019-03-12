@@ -62,7 +62,7 @@ double newton(double x, int n, double **parr)
         res += dy[0][i] * xpr;
     }
 	
-    delete [] dy;
+    clear_matrix(dy, n);
 	clear_matrix(parr, n);
 
     return res;

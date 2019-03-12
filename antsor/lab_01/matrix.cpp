@@ -4,7 +4,7 @@ void clear_matrix(double **a, int n)
 {
 	for (int i = 0; i < n; i++)
 		delete [] a[i];
-	delete [] a;
+	//delete [] a;
 }
 
 double **read_matrix(FILE *f, int *k)
