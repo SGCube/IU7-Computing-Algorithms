@@ -10,7 +10,7 @@
 
 double f(double x)
 {
-	return x * x - 4;
+	return cos(x) + x;
 }
 
 ProgWindow::ProgWindow(QWidget *parent) :
@@ -19,7 +19,7 @@ ProgWindow::ProgWindow(QWidget *parent) :
 {
 	ui->setupUi(this);
 	
-	ui->funcLabel->setText("y(x) = x^2 - 4");
+	ui->funcLabel->setText("y(x) = cos(x) + x");
 }
 
 ProgWindow::~ProgWindow()
@@ -82,6 +82,7 @@ void ProgWindow::on_pushButton_released()
 	ui->xBox->setText(QString::number(x0));
 	
 	clear_matrix(plist, n);
+	n = 0;
 	fclose(fin);
 }
 

@@ -15,7 +15,7 @@ double **surround(double **plist, double x, int n, int k)
 {
     double **parr = NULL;
     int i = 0;
-    while (i < k && x < plist[i][0])
+    while (i < k && x > plist[i][0])
         i++;
     int left = fmax(0, i - (n + 1)/ 2);
     int right = fmin(i + (n + 1)/ 2, k - 1);
@@ -25,15 +25,15 @@ double **surround(double **plist, double x, int n, int k)
         if (left == 0)
             right = n;
         else
-            left = k - n - 1;
+            left = k - n;
     }
 
     parr = new double* [n + 1];
-    for (int i = left; i <= right; i++)
+    for (int i = left, j = 0; i <= right; i++, j++)
     {
-        parr[i] = new double [2];
-        parr[i][0] = plist[i][0];
-        parr[i][1] = plist[i][1];
+        parr[j] = new double [2];
+        parr[j][0] = plist[i][0];
+        parr[j][1] = plist[i][1];
     }
     return parr;
 }

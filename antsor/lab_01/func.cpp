@@ -11,11 +11,12 @@ void file_func(double a, double b, double h, double (*func)(double))
 		
 		int n = (b - a) / h + 1;
 		fprintf(f, "%d\n", n);
-		
-		while (a <= b)
+		int i = 0;
+		while (i < n)
 		{
 			fprintf(f, "%lf %lf\n", a, func(a));
 			a += h;
+			i++;
 		}
 		
 		fclose(f);

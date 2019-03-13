@@ -13,7 +13,7 @@
 
 double f_cos(double x)
 {
-	return cos(x) - x;
+	return x * x;
 }
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -26,6 +26,8 @@ MainWindow::MainWindow(QWidget *parent) :
 	k = 0;
 	x = 0;
 	n = 0;
+	
+	ui->funcLabel->setText("y(x) = sin(x) - 2 * x");
 }
 
 MainWindow::~MainWindow()
