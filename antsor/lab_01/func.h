@@ -1,8 +1,6 @@
 #ifndef FUNC_H
 #define FUNC_H
 
-double func(double x);
-
-void file_func(double a, double b, int n);
+void file_func(double a, double b, double h, double (*func)(double));
 
 #endif // FUNC_H

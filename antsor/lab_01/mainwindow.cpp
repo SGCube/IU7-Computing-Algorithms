@@ -1,6 +1,7 @@
 #include <QTableWidget>
 #include <QMessageBox>
 #include <stdio.h>
+#include <cmath>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -9,6 +10,11 @@
 #include "func.h"
 #include "matrix.h"
 #include "interpol.h"
+
+double f_cos(double x)
+{
+	return cos(x) - x;
+}
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -26,11 +32,13 @@ MainWindow::~MainWindow()
 {
     delete ui;
 	clear_matrix(plist, k);
+	
+	emit firstWindow();
 }
 
 void MainWindow::on_genButton_released()
 {
-    file_func(-2, 2, 10);
+    file_func(-2, 2, 0.2, f_cos);
 }
 
 void MainWindow::on_loadButton_released()
@@ -50,6 +58,7 @@ void MainWindow::on_loadButton_released()
 	}
 	table_clear();
 	data_to_table();
+	fclose(fin);
 }
 
 void MainWindow::on_solveButton_released()
@@ -57,7 +66,7 @@ void MainWindow::on_solveButton_released()
 	bool correct = true;
 
 	QString xstr = ui->xEdit->text();
-	double x = xstr.toFloat(&correct);
+	double x = xstr.toDouble(&correct);
 	if (!correct)
 	{
 		QMessageBox::critical(this, "Ошибка", "Некорректное значение x!");
@@ -74,7 +83,7 @@ void MainWindow::on_solveButton_released()
 	}
 	
 	double y = solve(plist, x, n, k);
-	double yreal = func(x);
+	double yreal = f_cos(x);
 	
 	ui->yBox->setText(QString::number(y));
 	ui->yrealBox->setText(QString::number(yreal));

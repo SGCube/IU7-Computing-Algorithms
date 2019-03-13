@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+double f_cos(double x);
+
 namespace Ui {
 class MainWindow;
 }
@@ -14,6 +16,9 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
+signals:
+    void firstWindow();
 
 private slots:
 	

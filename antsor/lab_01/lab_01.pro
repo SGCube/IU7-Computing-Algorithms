@@ -28,14 +28,20 @@ SOURCES += \
         mainwindow.cpp \
     func.cpp \
     interpol.cpp \
-    matrix.cpp
+    matrix.cpp \
+    startwindow.cpp \
+    progwindow.cpp
 
 HEADERS += \
         mainwindow.h \
     error.h \
     func.h \
     interpol.h \
-    matrix.h
+    matrix.h \
+    startwindow.h \
+    progwindow.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    startwindow.ui \
+    progwindow.ui
