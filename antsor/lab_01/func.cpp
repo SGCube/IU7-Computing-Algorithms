@@ -9,10 +9,10 @@ void file_func(double a, double b, double h, double (*func)(double))
 		if (!f)
 			return;
 		
-		int n = (b - a) / h;
+		int n = (b - a) / h + 1;
 		fprintf(f, "%d\n", n);
 		
-		while (a <= b + h)
+		while (a <= b)
 		{
 			fprintf(f, "%lf %lf\n", a, func(a));
 			a += h;

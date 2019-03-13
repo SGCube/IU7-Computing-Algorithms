@@ -25,7 +25,7 @@ double **surround(double **plist, double x, int n, int k)
         if (left == 0)
             right = n;
         else
-            left = k - n;
+            left = k - n - 1;
     }
 
     parr = new double* [n + 1];

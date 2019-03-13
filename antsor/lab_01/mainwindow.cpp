@@ -38,7 +38,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_genButton_released()
 {
-    file_func(-2, 2, 0.2, f_cos);
+    file_func(-2, 2, 0.4, f_cos);
 }
 
 void MainWindow::on_loadButton_released()

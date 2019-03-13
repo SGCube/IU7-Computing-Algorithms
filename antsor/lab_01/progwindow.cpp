@@ -78,8 +78,6 @@ void ProgWindow::on_pushButton_released()
 	}
 	table_swap();
 	
-	print_matrix(plist, n);
-	
 	double x0 = solve(plist, 0, n - 1, n);
 	ui->xBox->setText(QString::number(x0));
 	
