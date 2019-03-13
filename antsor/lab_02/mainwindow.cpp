@@ -60,8 +60,13 @@ void MainWindow::on_loadButton_released()
 
 void MainWindow::on_solveButton_released()
 {
+	if (n < 3)
+	{
+		QMessageBox::critical(this, "Ошибка", "Задайте больше двух точек!");
+		return;
+	}
+	
 	bool correct = true;
-
 	QString xstr = ui->xEdit->text();
 	double x = xstr.toDouble(&correct);
 	if (!correct)
