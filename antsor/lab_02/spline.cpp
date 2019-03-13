@@ -119,26 +119,38 @@ double **spline(double **plist, int n)
 double solve(double **plist, double x, int n)
 {
     qsort(plist, n + 1, sizeof(double *), cmp_point_x);
-    double **splines = spline(plist, n);
-	if (!splines)
-		return -1;
-	
-    int i = 1;
-	while (i <= n && x > plist[i][0])
-		i++;
-	
-	double h = x - plist[i - 1][0];
-	double y = splines[0][i];
-	double hh = h;
-	
-	for (int j = 1; j < 4; j++)
+	double y;
+	if (n > 2)
 	{
-		y += splines[j][i] * hh;
-		hh *= h;
-	}
 	
-	//print_matrix(splines, 4, n + 2);
-	free_matrix(splines, 4);
+		double **splines = spline(plist, n);
+		if (!splines)
+			return -1;
+		
+		int i = 1;
+		while (i <= n && x > plist[i][0])
+			i++;
+		
+		double h = x - plist[i - 1][0];
+		y = splines[0][i];
+		double hh = h;
+		
+		for (int j = 1; j < 4; j++)
+		{
+			y += splines[j][i] * hh;
+			hh *= h;
+		}
+		
+		//print_matrix(splines, 4, n + 2);
+		free_matrix(splines, 4);
+	}
+	else
+	{
+		double xi = x - plist[0][0];
+		double yi = plist[1][1] - plist[0][1];
+		double hi = plist[1][0] - plist[0][0];
+		y = plist[0][1] + yi / hi * xi;
+	}
 	
     return y;
 }

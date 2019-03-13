@@ -13,7 +13,7 @@
 
 double func(double x)
 {
-	return cos(x) - x;
+	return pow(x - 5, 3);
 }
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -25,6 +25,8 @@ MainWindow::MainWindow(QWidget *parent) :
 	plist = nullptr;
 	x = 0;
 	n = 0;
+	
+	ui->funcLabel->setText("y(x) = x * x");
 }
 
 MainWindow::~MainWindow()
@@ -35,7 +37,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_genButton_released()
 {
-    file_func(-2, 2, 0.4, func);
+    file_func(-20, 5, 1, func);
 }
 
 void MainWindow::on_loadButton_released()
@@ -60,9 +62,9 @@ void MainWindow::on_loadButton_released()
 
 void MainWindow::on_solveButton_released()
 {
-	if (n < 3)
+	if (n < 2)
 	{
-		QMessageBox::critical(this, "Ошибка", "Задайте больше двух точек!");
+		QMessageBox::critical(this, "Ошибка", "Задайте больше одной точки!");
 		return;
 	}
 	
