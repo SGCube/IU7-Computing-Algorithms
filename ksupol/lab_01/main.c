@@ -19,6 +19,7 @@ int main(int argc, char **argv)
 {
 	int n;
 	double x;
+	double y;
 	double check;
 	int rc;
 	int amount = 0;
@@ -27,7 +28,7 @@ int main(int argc, char **argv)
 	setbuf(stdout, NULL);
 	if (argc < 2)
 	{
-		printf("Not enought data!\n");
+		printf("Not enough data!\n");
 		return NOT_EN;
 	}
 	
@@ -61,7 +62,14 @@ int main(int argc, char **argv)
 	check = scanf("%lf", &x);
 	if (check != 1)
 	{
-		printf("Wrong x!");
+		printf("Wrong x!\n");
+		return ERR;
+	}
+	printf("Enter y: ");
+	check = scanf("%lf", &y);
+	if (check != 1)
+	{
+		printf("Wrong y!\n");
 		return ERR;
 	}
 	if (matrix != NULL)
