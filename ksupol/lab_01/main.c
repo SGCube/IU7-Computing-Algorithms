@@ -19,7 +19,7 @@ int main(int argc, char **argv)
 {
 	int n;
 	double x;
-	double y;
+	//double y;
 	double check;
 	int rc;
 	int amount = 0;
@@ -65,6 +65,7 @@ int main(int argc, char **argv)
 		printf("Wrong x!\n");
 		return ERR;
 	}
+	/*
 	printf("Enter y: ");
 	check = scanf("%lf", &y);
 	if (check != 1)
@@ -72,6 +73,16 @@ int main(int argc, char **argv)
 		printf("Wrong y!\n");
 		return ERR;
 	}
+	*/
+	sort(amount, matrix);
+	print_matrix(matrix, amount, 2);
+	int up, down;
+	int inter = find_interval(n, amount, matrix, x, &up, &down);
+	if (inter == -1)
+		printf("X is out of the table, it is too small!\n");
+	else if (inter == -2)
+		printf("X is out of the table, it is too big!\n");
+	printf("up = %d, down = %d\n", up, down);
 	if (matrix != NULL)
 		free_matrix(matrix);
 	fclose(f);
