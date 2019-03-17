@@ -13,7 +13,7 @@ endif
 app.exe : err.o func.o matrix.o main.o
 	$(CC) $^ -o $@
 
-table.exe : add_finc.o
+table.exe : add_func.o
 	$(CC) $^ -o $@
 	
 %.o : %.c
