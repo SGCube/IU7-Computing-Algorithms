@@ -146,13 +146,14 @@ double **diff(double **matrix, int up, int down, int n)
 	return result;
 }
 
-void interpolate(double **result, int n, double x, double **matrix)
+void interpolate(double **result, int n, double x, double **matrix,
+				int up, int down)
 {
-	double res = 1;
+	double res = result[0][0];
     double a = 1;
     for (int i = 1; i < n + 1; i++)
     {
-        a *= x - matrix[i - 1][0];
+        a *= x - matrix[up + i - 1][0];
         res += a * result[0][i];
     }
 	printf("Result: y(%lf) = %lf\n", x, res);

@@ -26,7 +26,6 @@ int main(int argc, char **argv)
 	int amount = 0;
 	double **matrix = NULL;
 	double **result_x = NULL;
-	//double **result_y = NULL;
 	
 	setbuf(stdout, NULL);
 	if (argc < 2)
@@ -76,14 +75,13 @@ int main(int argc, char **argv)
 		printf("X is out of the table, it is too small!\n");
 	else if (inter == -2)
 		printf("X is out of the table, it is too big!\n");
-	printf("up = %d down = %d\n", up, down);
 	result_x = diff(matrix, up, down, n);
 	if (!result_x)
 	{
 		printf("Memory allocation error!");
 		return ERR;
 	}
-	interpolate(result_x, n, x, matrix);
+	interpolate(result_x, n, x, matrix, up, down);
 	if (matrix != NULL)
 		free_matrix(matrix);
 	fclose(f);

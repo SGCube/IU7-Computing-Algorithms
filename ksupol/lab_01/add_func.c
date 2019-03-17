@@ -6,7 +6,7 @@
 
 double f(double x)
 {
-	return sin(x + 90);
+	return cos(90 + x);
 }
 
 int main(int argc, char **argv)

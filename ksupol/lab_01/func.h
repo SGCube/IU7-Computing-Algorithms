@@ -13,5 +13,6 @@ int find_interval(int n, int a, double **matrix, double x,
 		
 double **diff(double **matrix, int up, int down, int n);
 
-void interpolate(double **result, int n, double x, double **matrix);
+void interpolate(double **result, int n, double x, double **matrix, 
+				int up, int down);
 #endif
