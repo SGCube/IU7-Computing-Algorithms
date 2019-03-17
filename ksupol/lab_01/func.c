@@ -104,8 +104,8 @@ int find_interval(int n, int a, double **matrix, double x,
 	{
 		if (ii - n / 2 >= 0 && ii + n / 2 <= a - 1)
 		{
-			*up = ii - n / 2;
-			*down = ii + n / 2;
+			*up = ii - n / 2 + 1;
+			*down = ii + n / 2 - 1;
 		}
 		if (ii - n / 2 < 0)
 		{
