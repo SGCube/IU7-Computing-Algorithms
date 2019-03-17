@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "func.h"
 #include "err.h"
+#include "matrix.h"
 
 #define WR_AM 3
 #define EMPTY 2
