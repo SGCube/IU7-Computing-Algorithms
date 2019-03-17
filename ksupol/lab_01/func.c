@@ -11,6 +11,11 @@
 #define NOT_EN 6
 #define NO_MAT 7
 
+double f(double x)
+{
+	return sin(x + 90);
+}
+
 double **allocate_matrix(int n, int m)
 {
 	double **matrix;
@@ -90,7 +95,6 @@ void free_matrix(double **matrix)
 void sort(int n, double **matrix)
 {
 	double *tmp = NULL;
-	setbuf(stdout, NULL);
 	for (int i = 1; i < n; i++)
 	{
         for (int j = 1; j < n; j++)
@@ -173,4 +177,42 @@ int find_interval(int n, int a, double **matrix, double x,
 		}
 	}
 	return OK;
+}
+
+double **diff(double **matrix, int up, int down, int n)
+{
+	double **result;
+	result = allocate_matrix(n + 1, n + 1);
+	if (!*result)
+		return NULL;
+	int k = 0;
+	for (int i = up; i < down + 1; i++)
+	{
+		result[k][0] = matrix[i][1];
+		k++;
+	}
+	
+	for (int i = 1; i < n + 1; i++)
+	{
+        for (int j = 0; j < n + 1 - i; j++)
+		{
+            result[j][i] = (result[j][i - 1] - result[j + 1][i - 1]) /
+                    (matrix[j][0] - matrix[j + i][0]);
+		}
+	}
+	print_matrix(result, n+1, n+1);
+	return result;
+}
+
+void interpolate(double **result, int n, double x, double **matrix)
+{
+	double res = 1;
+    double a = 1;
+    for (int i = 1; i < n + 1; i++)
+    {
+        a *= x - matrix[i - 1][0];
+        res += a * result[0][i];
+    }
+	printf("Result: y(%lf) = %lf\n", x, res);
+	printf("True result: y(%lf) = %lf\n", x, f(x));
 }

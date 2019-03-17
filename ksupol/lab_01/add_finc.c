@@ -11,7 +11,7 @@ double f(double x)
 
 int main(int argc, char **argv)
 {
-	if (argc < 2)
+	if (argc < 3)
 	{
 		printf("Not enough data!\n");
 		return ERR;
@@ -24,21 +24,21 @@ int main(int argc, char **argv)
 	double step;
 	printf("Enter point 'from': ");
 	rc = scanf("%lf", &from);
-	if (rc != 0)
+	if (rc != 1)
 	{
 		printf("Wrong point 'from'!\n");
 		return ERR;
 	}
 	printf("\nEnter point 'to': ");
 	rc = scanf("%lf", &to);
-	if (rc != 0)
+	if (rc != 1)
 	{
 		printf("Wrong point 'to'!\n");
 		return ERR;
 	}
 	printf("\nEnter step: ");
 	rc = scanf("%lf", &step);
-	if (rc != 0)
+	if (rc != 1)
 	{
 		printf("Wrong step!\n");
 		return ERR;
@@ -54,5 +54,17 @@ int main(int argc, char **argv)
 	for (double i = from; i <= to; i += step)
 		fprintf(g, "%lf\t%f\n", i, f(i));
 	fclose(g);
+	
+	FILE *j = fopen(argv[2], "w");
+	if (!j)
+	{
+		printf("Couldn't open file!\n");
+		return ERR;
+	}
+	am = (to - from) / step + 1;
+	fprintf(j, "%d\n", am);
+	for (double i = from; i <= to; i += step)
+		fprintf(j, "%lf\t%f\n", f(i), i);
+	fclose(j);
 	return 0;
 }

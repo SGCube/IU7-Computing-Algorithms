@@ -12,6 +12,9 @@ endif
 
 app.exe : err.o func.o main.o
 	$(CC) $^ -o $@
+
+table.exe : add_finc.o
+	$(CC) $^ -o $@
 	
 %.o : %.c
 	$(CC) $(CFLAGS) -c $<

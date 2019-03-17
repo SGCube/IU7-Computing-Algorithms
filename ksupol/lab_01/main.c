@@ -24,6 +24,8 @@ int main(int argc, char **argv)
 	int rc;
 	int amount = 0;
 	double **matrix = NULL;
+	double **result_x = NULL;
+	//double **result_y = NULL;
 	
 	setbuf(stdout, NULL);
 	if (argc < 2)
@@ -46,6 +48,8 @@ int main(int argc, char **argv)
 		fclose(f);
 		return ERR;
 	}
+	sort(amount, matrix);
+	print_matrix(matrix, amount, 2);
 	printf("Enter n: ");
 	rc = scanf("%d", &n);
 	if (rc != 1 || n <= 0)
@@ -65,27 +69,22 @@ int main(int argc, char **argv)
 		printf("Wrong x!\n");
 		return ERR;
 	}
-	/*
-	printf("Enter y: ");
-	check = scanf("%lf", &y);
-	if (check != 1)
-	{
-		printf("Wrong y!\n");
-		return ERR;
-	}
-	*/
-	sort(amount, matrix);
-	print_matrix(matrix, amount, 2);
 	int up, down;
 	int inter = find_interval(n, amount, matrix, x, &up, &down);
 	if (inter == -1)
 		printf("X is out of the table, it is too small!\n");
 	else if (inter == -2)
 		printf("X is out of the table, it is too big!\n");
-	printf("up = %d, down = %d\n", up, down);
+	printf("up = %d down = %d\n", up, down);
+	result_x = diff(matrix, up, down, n);
+	if (!result_x)
+	{
+		printf("Memory allocation error!");
+		return ERR;
+	}
+	interpolate(result_x, n, x, matrix);
 	if (matrix != NULL)
 		free_matrix(matrix);
 	fclose(f);
-
 	return OK;
 }
