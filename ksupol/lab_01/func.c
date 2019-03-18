@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "func.h"
 #include "matrix.h"
-#include <math.h>
+#include "function.h"
 
 #define OK 0
 #define WR_ELEM -4
@@ -10,11 +10,6 @@
 #define ERR_MALLOC 5
 #define NOT_EN 6
 #define NO_MAT 7
-
-double f(double x)
-{
-	return sin(x + 90);
-}
 
 int read_from_file(FILE *f, int *amount, double ***matrix)
 {
@@ -146,7 +141,7 @@ double **diff(double **matrix, int up, int down, int n)
 	return result;
 }
 
-void interpolate(double **result, int n, double x, double **matrix,
+double interpolate(double **result, int n, double x, double **matrix,
 				int up, int down)
 {
 	double res = result[0][0];
@@ -156,6 +151,5 @@ void interpolate(double **result, int n, double x, double **matrix,
         a *= x - matrix[up + i - 1][0];
         res += a * result[0][i];
     }
-	printf("Result: y(%lf) = %lf\n", x, res);
-	printf("True result: y(%lf) = %lf\n", x, f(x));
+	return res;
 }

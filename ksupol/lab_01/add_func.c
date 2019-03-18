@@ -1,13 +1,9 @@
 #include <stdio.h>
 #include <math.h>
+#include "function.h"
 
 #define OK 0
 #define ERR -1
-
-double f(double x)
-{
-	return cos(90 + x);
-}
 
 int main(int argc, char **argv)
 {

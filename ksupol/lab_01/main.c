@@ -3,6 +3,7 @@
 #include "func.h"
 #include "err.h"
 #include "matrix.h"
+#include "function.h"
 
 #define WR_AM 3
 #define EMPTY 2
@@ -20,7 +21,6 @@ int main(int argc, char **argv)
 {
 	int n;
 	double x;
-	//double y;
 	double check;
 	int rc;
 	int amount = 0;
@@ -34,18 +34,18 @@ int main(int argc, char **argv)
 		return NOT_EN;
 	}
 	
-	FILE *f = fopen(argv[1], "r");
-	if (!f)
+	FILE *g = fopen(argv[1], "r");
+	if (!g)
 	{
 		printf("There is no such file!\n");
 		return NO_SUCH;
 	}
-	rc = read_from_file(f, &amount, &matrix);
+	rc = read_from_file(g, &amount, &matrix);
 	if (rc != OK)
 	{
 		printf("rc = %d\n", rc);
 		err_code(rc);
-		fclose(f);
+		fclose(g);
 		return ERR;
 	}
 	sort(amount, matrix);
@@ -81,9 +81,10 @@ int main(int argc, char **argv)
 		printf("Memory allocation error!");
 		return ERR;
 	}
-	interpolate(result_x, n, x, matrix, up, down);
+	double res = interpolate(result_x, n, x, matrix, up, down);
+	printf("Result: y(%lf) = %lf\n", x, res);
+	printf("True result: y(%lf) = %lf\n", x, f(x));
 	if (matrix != NULL)
 		free_matrix(matrix);
-	fclose(f);
 	return OK;
 }
