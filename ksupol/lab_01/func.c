@@ -142,7 +142,7 @@ double **diff(double **matrix, int up, int down, int n)
 }
 
 double interpolate(double **result, int n, double x, double **matrix,
-				int up, int down)
+				int up)
 {
 	double res = result[0][0];
     double a = 1;

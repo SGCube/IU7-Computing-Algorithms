@@ -81,7 +81,7 @@ int main(int argc, char **argv)
 		printf("Memory allocation error!");
 		return ERR;
 	}
-	double res = interpolate(result_x, n, x, matrix, up, down);
+	double res = interpolate(result_x, n, x, matrix, up);
 	printf("Result: y(%lf) = %lf\n", x, res);
 	printf("True result: y(%lf) = %lf\n", x, f(x));
 	if (matrix != NULL)
