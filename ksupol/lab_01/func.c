@@ -134,7 +134,7 @@ double **diff(double **matrix, int up, int down, int n)
         for (int j = 0; j < n + 1 - i; j++)
 		{
             result[j][i] = (result[j][i - 1] - result[j + 1][i - 1]) /
-                    (matrix[j][0] - matrix[j + i][0]);
+                    (matrix[j+ up][0] - matrix[j + i + up][0]);
 		}
 	}
 	print_matrix(result, n+1, n+1);
