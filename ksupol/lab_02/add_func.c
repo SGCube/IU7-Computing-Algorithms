@@ -13,7 +13,7 @@ int main(int argc, char **argv)
 		return ERR;
 	}
 	setbuf(stdout, NULL);
-	int am;
+	int amount;
 	int rc;
 	double from;
 	double to;
@@ -45,8 +45,8 @@ int main(int argc, char **argv)
 		printf("Couldn't open file!\n");
 		return ERR;
 	}
-	am = (to - from) / step + 1;
-	fprintf(g, "%d\n", am);
+	amount = (to - from) / step + 1;
+	fprintf(g, "%d\n", amount);
 	for (double i = from; i <= to; i += step)
 		fprintf(g, "%lf\t%f\n", i, f(i));
 	fclose(g);
@@ -57,8 +57,8 @@ int main(int argc, char **argv)
 		printf("Couldn't open file!\n");
 		return ERR;
 	}
-	am = (to - from) / step + 1;
-	fprintf(j, "%d\n", am);
+	amount = (to - from) / step + 1;
+	fprintf(j, "%d\n", amount);
 	for (double i = from; i <= to; i += step)
 		fprintf(j, "%lf\t%f\n", f(i), i);
 	fclose(j);
