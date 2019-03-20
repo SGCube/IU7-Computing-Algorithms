@@ -75,21 +75,25 @@ int find_interval(int n, int a, double **matrix, double x,
 		else
 			break;
 	}
+	printf("ii = %d\n", ii);
 	//если кол-во узлов четное
 	if ((n + 1) % 2 == 0)
 	{
 		if (ii - (n + 1)/2 >= 0 && ii + (n + 1)/2 <= a - 1)
 		{
+			printf("1\n");
 			*up = ii - (n + 1)/2 + 1;
 			*down = ii + (n + 1)/2;
 		}
 		if (ii - (n + 1)/2 < 0)
 		{
+			printf("2\n");
 			*up = 0;
 			*down = n;
 		}
 		if (ii + (n + 1)/2 > a)
 		{
+			printf("3\n");
 			*up = ii - n;
 			*down = a - 1;
 		}
@@ -99,8 +103,8 @@ int find_interval(int n, int a, double **matrix, double x,
 	{
 		if (ii - n / 2 >= 0 && ii + n / 2 <= a - 1)
 		{
-			*up = ii - n / 2 + 1;
-			*down = ii + n / 2 - 1;
+			*up = ii - n / 2;
+			*down = ii + n / 2;
 		}
 		if (ii - n / 2 < 0)
 		{
@@ -123,7 +127,7 @@ double **diff(double **matrix, int up, int down, int n)
 	if (!*result)
 		return NULL;
 	int k = 0;
-	for (int i = up; i < down + 1; i++)
+	for (int i = up; i <= down; i++)
 	{
 		result[k][0] = matrix[i][1];
 		k++;
