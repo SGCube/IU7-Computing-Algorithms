@@ -43,7 +43,6 @@ int main(int argc, char **argv)
 	rc = read_from_file(g, &amount, &matrix);
 	if (rc != OK)
 	{
-		printf("rc = %d\n", rc);
 		err_code(rc);
 		fclose(g);
 		return ERR;

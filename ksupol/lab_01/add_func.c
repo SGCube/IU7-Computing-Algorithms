@@ -32,6 +32,11 @@ int main(int argc, char **argv)
 		printf("Wrong point 'to'!\n");
 		return ERR;
 	}
+	if (from > to)
+	{
+		printf("Point 'from' is bigger than point 'to'!\n");
+		return ERR;
+	}
 	printf("\nEnter step: ");
 	rc = scanf("%lf", &step);
 	if (rc != 1)
@@ -47,8 +52,12 @@ int main(int argc, char **argv)
 	}
 	am = (to - from) / step + 1;
 	fprintf(g, "%d\n", am);
-	for (double i = from; i <= to; i += step)
-		fprintf(g, "%lf\t%f\n", i, f(i));
+	double k = from;
+	for (int i = 0; i < am; i++)
+	{
+		fprintf(g, "%lf\t%f\n", k, f(k));
+		k += step;
+	}
 	fclose(g);
 	
 	FILE *j = fopen(argv[2], "w");
@@ -57,10 +66,13 @@ int main(int argc, char **argv)
 		printf("Couldn't open file!\n");
 		return ERR;
 	}
-	am = (to - from) / step + 1;
 	fprintf(j, "%d\n", am);
-	for (double i = from; i <= to; i += step)
-		fprintf(j, "%lf\t%f\n", f(i), i);
+	k = from;
+	for (int i = 0; i < am; i++)
+	{
+		fprintf(j, "%lf\t%f\n", f(k), k);
+		k += step;
+	}
 	fclose(j);
 	return 0;
 }

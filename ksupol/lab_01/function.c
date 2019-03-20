@@ -4,5 +4,7 @@
 
 double f(double x)
 {
-	return cos(x * PI/2);
+	//return cos(x * PI/2);
+	return x * x;
+	//return sin(x * PI/2);
 }
