@@ -19,12 +19,14 @@
 
 int main(int argc, char **argv)
 {
-	int n;
 	double x;
 	double check;
 	int rc;
 	int amount = 0;
-	double **matrix = NULL;  
+	int am_koef = 0;
+	double **matrix = NULL;
+	double **koeff = NULL;
+	double **c = NULL;
 	
 	setbuf(stdout, NULL);
 	if (argc < 2)
@@ -56,8 +58,18 @@ int main(int argc, char **argv)
 		printf("Wrong x!\n");
 		return ERR;
 	}
-	
+	am_koef = amount + 1;
+	koeff = create_table_koeff(matrix, am_koef);
+	print_matrix(koeff, 4, am_koef);
+	c = create_table_c(matrix, am_koef);
+	if (!koeff)
+	{
+		printf("Memory allocation error!\n");
+		return ERR;
+	}
+	else
+		free_matrix(koeff, amount);
 	if (matrix != NULL)
-		free_matrix(matrix);
+		free_matrix(matrix, amount);
 	return OK;
 }
