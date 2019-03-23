@@ -11,6 +11,6 @@ int read_matrix(double ***matrix, int n, FILE *f);
 void print_matrix(double **matrix, int n, int m);
 
 //функция освобождения памяти из-под матрицы
-void free_matrix(double **matrix);
+void free_matrix(double **matrix, int n);
 
 #endif

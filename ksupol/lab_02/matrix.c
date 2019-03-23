@@ -10,17 +10,18 @@
 double **allocate_matrix(int n, int m)
 {
 	double **matrix;
-	matrix = malloc(n * sizeof(double *));
+	matrix = calloc(n, sizeof(double *));
 	if (!matrix)
 		return NULL;
-	double *data = calloc(n * m, sizeof(double));
-	if (!data)
-	{
-		free(matrix);
-		return NULL;
-	}
 	for (int i = 0; i < n; i++)
-		matrix[i] = data + i * m;
+	{
+		matrix[i] = calloc(m, sizeof(double));
+		if (!matrix[i])
+		{
+			free_matrix(matrix, n);
+			return NULL;
+		}
+	}
 	return matrix;
 }
 
@@ -59,8 +60,9 @@ void print_matrix(double **matrix, int n, int m)
 	printf("\n");
 }
 
-void free_matrix(double **matrix)
+void free_matrix(double **matrix, int n)
 {
-	free(matrix[0]);
+	for (int i = 0; i < n; i++)
+		free(matrix[i]);
 	free(matrix);
 }
