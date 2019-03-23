@@ -10,4 +10,7 @@ void sort(int n, double **matrix);
 //функция нахождения коэффициентов
 double **create_table_koeff(double **matrix, int n);
 
+//
+double **create_table_c(double **matrix, int n);
+
 #endif

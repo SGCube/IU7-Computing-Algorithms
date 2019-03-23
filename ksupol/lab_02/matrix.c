@@ -50,7 +50,7 @@ int read_matrix(double ***matrix, int n, FILE *f)
 
 void print_matrix(double **matrix, int n, int m)
 {
-	printf("\nMatrix:\n");
+	//printf("\nMatrix:\n");
 	for (int i = 0; i < n; i++)
 	{
 		for (int j = 0; j < m; j++)
