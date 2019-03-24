@@ -10,7 +10,7 @@ ifeq ($(mode), release)
 	CFLAGS += -DNDEBUG -g0
 endif
 
-app.exe : err.o func.o function.o matrix.o main.o
+app.exe : err.o spline.o function.o matrix.o main.o
 	$(CC) $^ -o $@
 
 table.exe : function.o add_func.o

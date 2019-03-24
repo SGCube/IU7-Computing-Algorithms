@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "func.h"
+#include "spline.h"
 #include "err.h"
 #include "matrix.h"
 #include "function.h"
@@ -58,7 +58,7 @@ int main(int argc, char **argv)
 		printf("Wrong x!\n");
 		return ERR;
 	}
-	am_koef = amount + 1;
+	am_koef = amount;
 	koeff = create_table_koeff(matrix, am_koef);
 	if (!koeff)
 	{

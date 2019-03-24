@@ -10,7 +10,7 @@
 double **allocate_matrix(int n, int m)
 {
 	double **matrix = NULL;
-	matrix = malloc(n * sizeof(double *));
+	matrix = calloc(n, sizeof(double *));
 	if (!matrix)
 		return NULL;
 	double *data = NULL;

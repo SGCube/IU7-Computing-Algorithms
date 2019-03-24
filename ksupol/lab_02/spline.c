@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "func.h"
+#include "spline.h"
 #include "matrix.h"
 
 #define WR_AM 3
@@ -54,7 +54,6 @@ double **create_table_koeff(double **matrix, int n)
 	data = allocate_matrix(4, n);
 	if (!data)
 		return NULL;
-	data[0][0] = 0;
 	for (int i = 1; i < n; i++)
 		data[0][i] = matrix[i - 1][1];
 	return data;
@@ -95,7 +94,8 @@ double **create_table_c(double **matrix, int n)
 		
 	}
 	c[n - 1][n - 2] = matrix[n - 2][0] - matrix[n - 3][0];
-	c[n - 1][n - 1] = -2 * (matrix[n - 2][0] - matrix[n - 3][0]);
+	c[n - 1][n - 1] = -2 * (matrix[n - 2][0] - matrix[n - 3][0] +
+							matrix[n - 1][0] - matrix[n - 2][0]);
 	
 	return c;
 }
