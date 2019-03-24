@@ -60,23 +60,50 @@ int main(int argc, char **argv)
 	}
 	am_koef = amount + 1;
 	koeff = create_table_koeff(matrix, am_koef);
-	printf("Matrix with koeff a, b, c, d:\n");
-	print_matrix(koeff, 4, am_koef);
-	c = create_table_c(matrix, am_koef);
-	printf("Diagonal matrix:\n");
-	print_matrix(c, am_koef + 1, am_koef + 1);
-	double * str = NULL;
-	str = create_koeff_c(matrix, am_koef);
-	fill_table_koeff(str, koeff, am_koef);
-	printf("\nHere:\n");
-	print_matrix(koeff, 4, am_koef);
 	if (!koeff)
 	{
 		printf("Memory allocation error!\n");
 		return ERR;
 	}
-	else
-		free_matrix(koeff, amount);
+	c = create_table_c(matrix, am_koef);
+	if (!c)
+	{
+		printf("Memory allocation error!\n");
+		return ERR;
+	}
+	printf("Diagonal matrix:\n");
+	print_matrix(c, am_koef + 1, am_koef + 1);
+	double *ff = NULL;
+	ff = create_f(matrix, am_koef);
+	if (!ff)
+	{
+		printf("Memory allocation error!\n");
+		return ERR;
+	}
+	double *c_koeff = NULL;
+	c_koeff = find_c_koeff(c, ff, am_koef);
+	if (!c_koeff)
+	{
+		printf("Memory allocation error!\n");
+		return ERR;
+	}
+	fill_table_koeff(matrix, koeff, c_koeff, am_koef);
+	printf("Matrix with koeff a, b, c, d:\n");
+	print_matrix(koeff, 4, am_koef);
+	int from = 0, to = 0;
+	int j = find_interval(x, &from, &to, matrix, amount);
+	if (j == -1)
+		printf("X is out of the table, it is too small!\n");
+	else if (j == -2)
+		printf("X is out of the table, it is too big!\n");
+	float y = find_y(from, to, x, koeff, matrix);
+	printf("y(%lf) = %lf\n real = y(%lf) = %lf\n", x, y, x, f(x));
+	if (c != NULL)
+		free_matrix(c, am_koef + 1);
+	if (ff != NULL)
+		free(ff);
+	if (koeff != NULL)
+		free_matrix(koeff, am_koef);
 	if (matrix != NULL)
 		free_matrix(matrix, amount);
 	return OK;
