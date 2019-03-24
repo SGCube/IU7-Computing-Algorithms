@@ -73,30 +73,19 @@ double **create_table_c(double **matrix, int n)
 		c[0][i] = 0;
 		c[n-1][i] = 0;
 	}
-	int m = 0;
-	int j = 0;
-	for (int i = 1; i < n - 1; i++)
+	c[1][0] = 0;
+	c[1][1] = 0;
+	c[1][2] = 0;
+	for (int i = 2; i < n - 1; i++)
 	{
-		if (i == 1)
-		{
-			c[i][m] = 0;
-			c[i][m + 1] = 0;
-		}
-		else
-		{
-			c[i][m] = matrix[j + 1][0] - matrix[j][0];
-			c[i][m + 1] = -2 * (matrix[j + 1][0] - matrix[j][0] +
-								matrix[j + 2][0] - matrix[j + 1][0]);
-			j++;
-		}
-		c[i][m + 2] = matrix[i][0] - matrix[i - 1][0];
-		m++;
-		
+		c[i][i - 1] = matrix[i - 1][0] - matrix[i - 2][0];
+		c[i][i] = -2 * (matrix[i - 1][0] - matrix[i - 2][0] +
+							matrix[i][0] - matrix[i - 1][0]);
+		c[i][i + 1] = matrix[i][0] - matrix[i - 1][0];
 	}
 	c[n - 1][n - 2] = matrix[n - 2][0] - matrix[n - 3][0];
 	c[n - 1][n - 1] = -2 * (matrix[n - 2][0] - matrix[n - 3][0] +
 							matrix[n - 1][0] - matrix[n - 2][0]);
-	
 	return c;
 }
 
@@ -105,8 +94,9 @@ double *create_f(double **matrix, int n)
 	double *f = calloc(n + 1, sizeof(double));
 	if (!f)
 		return NULL;
-	for (int i = 2; i < n - 1; i++)
+	for (int i = 2; i < n; i++)
 	{
+		printf("i = %d\n", i);
 		double hi = matrix[i][0] - matrix[i - 1][0];
 		double hi1 = matrix[i - 1][0] - matrix[i - 2][0];
 		double yi = matrix[i][1];
@@ -114,6 +104,10 @@ double *create_f(double **matrix, int n)
 		double yi2 = matrix[i - 2][1];
 		f[i] = -3 * ((yi - yi1)/hi - (yi1 - yi2)/hi1);
 	}
+	printf("\nF\n");
+	for (int i = 0; i < n + 1; i++)
+		printf("%lf ", f[i]);
+	printf("\n");
 	return f;
 }
 
