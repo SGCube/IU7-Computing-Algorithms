@@ -13,4 +13,8 @@ double **create_table_koeff(double **matrix, int n);
 //
 double **create_table_c(double **matrix, int n);
 
+double *create_koeff_c(double **matrix, int n);
+
+void fill_table_koeff(double *str, double **koeff, int n);
+
 #endif

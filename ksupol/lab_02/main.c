@@ -64,7 +64,12 @@ int main(int argc, char **argv)
 	print_matrix(koeff, 4, am_koef);
 	c = create_table_c(matrix, am_koef);
 	printf("Diagonal matrix:\n");
-	print_matrix(c, am_koef, am_koef);
+	print_matrix(c, am_koef + 1, am_koef + 1);
+	double * str = NULL;
+	str = create_koeff_c(matrix, am_koef);
+	fill_table_koeff(str, koeff, am_koef);
+	printf("\nHere:\n");
+	print_matrix(koeff, 4, am_koef);
 	if (!koeff)
 	{
 		printf("Memory allocation error!\n");

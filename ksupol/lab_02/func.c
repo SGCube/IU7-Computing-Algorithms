@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "func.h"
 #include "matrix.h"
 
@@ -61,40 +62,62 @@ double **create_table_koeff(double **matrix, int n)
 double **create_table_c(double **matrix, int n)
 {
 	double **c = NULL;
-	c = allocate_matrix(n, n);
+	c = allocate_matrix(n + 1, n + 1);
 	if (!c)
+	{
+		free_matrix(c, n);
 		return NULL;
+	}
 	for (int i = 0; i < n; i++)
 	{
 		c[0][i] = 0;
 		c[n-1][i] = 0;
 	}
-	int m1 = 0;
-	int m2 = 1;
-	int m3 = 2;
-	double a = 0;
-	double cc = 0;
-	double b = 0;
-	int j = 0;
-	for (int i = 1; i < n; i++)
+	double *f = calloc(n + 1, sizeof(double));
+	for (int i = 2; i < n - 1; i++)
 	{
-		if (j == 0)
-			a = 0;
-		else
-			a = matrix[j][0] - matrix[j - 1][0];
-
-		if (j == n - 2)
-			b = 0;
-		else
-			b = matrix[j + 1][0] - matrix[j][0];
-		cc = 2 * (a + b);
-		c[i][m1] = a;
-		c[i][m2] = cc;
-		c[i][m3] = b;
-		m1++;
-		m2++;
-		m3++;
-		j++;
+		double hi = matrix[i][0] - matrix[i - 1][0];
+		double hi1 = matrix[i - 1][0] - matrix[i - 2][0];
+		double yi = matrix[i][1];
+		double yi1 = matrix[i - 1][1];
+		double yi2 = matrix[i - 2][1];
+		f[i] = -3 * ((yi - yi1)/hi - (yi1 - yi2)/hi1);
 	}
+	int m = 0;
+	int j = 0;
+	
+	for (int i = 1; i < n - 1; i++)
+	{
+		if (i == 1)
+		{
+			c[i][m] = 0;
+			c[i][m + 1] = 0;
+		}
+		else
+		{
+			c[i][m] = matrix[j + 1][0] - matrix[j][0];
+			c[i][m + 1] = -2 * (matrix[j + 1][0] - matrix[j][0] +
+								matrix[j + 2][0] - matrix[j + 1][0]);
+			j++;
+		}
+		c[i][m + 2] = matrix[i][0] - matrix[i - 1][0];
+		m++;
+		
+	}
+	c[n - 1][n - 2] = matrix[n - 2][0] - matrix[n - 3][0];
+	c[n - 1][n - 1] = -2 * (matrix[n - 2][0] - matrix[n - 3][0]);
 	return c;
+}
+
+double * create_koeff_c(double **matrix, int n)
+{
+	return NULL;
+}
+
+void fill_table_koeff(double *f, double **koeff, int n)
+{
+	/*
+	for (int i = 0; i < n; i++)
+		koeff[2][i] = f[i];
+	*/
 }
