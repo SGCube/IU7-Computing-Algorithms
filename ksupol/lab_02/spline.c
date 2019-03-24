@@ -96,37 +96,52 @@ double *create_f(double **matrix, int n)
 		double yi2 = matrix[i - 2][1];
 		f[i] = -3 * ((yi - yi1)/hi - (yi1 - yi2)/hi1);
 	}
+	/*
 	printf("\nF\n");
 	for (int i = 0; i < n + 1; i++)
 		printf("%lf ", f[i]);
 	printf("\n");
+	*/
 	return f;
 }
 
-double *find_c_koeff(double **c, double *f, int n)
+double *find_c_koeff(double **c, double *f, int n, double **matr)
 {
 	double *c_koeff = calloc(n + 1, sizeof(double));
 	if (!c_koeff)
 		return NULL;
 	double *kk = calloc(n + 1, sizeof(double));
 	if (!kk)
+	{
+		free(c_koeff);
 		return NULL;
+	}		
 	double *nn = calloc(n + 1, sizeof(double));
 	if (!nn)
+	{
+		free(c_koeff);
+		free(kk);
 		return NULL;
-	for (int i = 2; i < n; i++)
+	}
+	for (int i = 2; i <= n; i++)
 	{
 		double ai = c[i][i - 1];
 		double bi = c[i][i];
 		double di = c[i][i + 1];
-		//printf("i = %d ai = %lf bi = %lf di = %lf\n", i, ai, bi, di);
+		
 		kk[i + 1] = di/(bi - ai*kk[i]);
 		nn[i + 1] = (ai*nn[i] + f[i])/(bi - ai*kk[i]);
 	}
-	for (int i = n - 1; i >= 2; i--)
-	{
+	kk[n] = kk[n - 1];
+	/*
+	for (int i = 0; i < n + 1; i++)
+		printf("%lf ", kk[i]);
+	printf("\n");
+	for (int i = 0; i < n + 1; i++)
+		printf("%lf ", nn[i]);
+	*/
+	for (int i = n - 1; i > 0; i--)
 		c_koeff[i] = kk[i + 1] * c_koeff[i + 1] + nn[i + 1];
-	}
 	return c_koeff;
 }
 
@@ -134,13 +149,13 @@ void fill_table_koeff(double **m, double **koeff, double *c, int n)
 {
 	for (int i = 0; i < n; i++)
 		koeff[2][i] = c[i];
-	for (int i = 1; i < n - 1; i++)
+	for (int i = 1; i < n; i++)
 	{
 		double yi = m[i][1];
 		double yi1 = m[i - 1][1];
 		double hi = m[i][0] - m[i - 1][0];
-		koeff[1][i] = (yi - yi1)/hi - 1/3*hi*(c[i+1] + 2*c[i]);
-		koeff[3][i] = (c[i + 1] - c[i])/ 3*hi;
+		koeff[1][i] = (yi - yi1)/hi - (1/3*hi*(c[i+2] + 2*c[i]));
+		koeff[3][i] = (c[i - 1] - c[i])/ 3*hi;
 	}
 }
 
@@ -178,6 +193,7 @@ int find_interval(double x, int *from, int *to, double **matr, int n)
 float find_y(int from, int to, double x, double **k, double **matr)
 {
 	double xi1 = matr[from][0];
+	printf("%lf\n", k[1][to]);
 	double y = k[0][to] + k[1][to]*(x - xi1) +
 			k[2][to]*pow((x - xi1), 2) + k[3][to]*pow((x - xi1), 3);
 	return y;

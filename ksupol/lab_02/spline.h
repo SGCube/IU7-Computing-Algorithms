@@ -15,7 +15,7 @@ double **create_table_c(double **matrix, int n);
 
 double *create_f(double **matrix, int n);
 
-double *find_c_koeff(double **c, double *f, int n);
+double *find_c_koeff(double **c, double *f, int n, double **matr);
 
 void fill_table_koeff(double **m, double **koeff, double *c_koeff, int n);
 

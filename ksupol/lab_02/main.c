@@ -73,8 +73,8 @@ int main(int argc, char **argv)
 		printf("Memory allocation error!\n");
 		return ERR;
 	}
-	printf("Diagonal matrix:\n");
-	print_matrix(c, am_koef + 1, am_koef + 1);
+	//printf("Diagonal matrix:\n");
+	//print_matrix(c, am_koef + 1, am_koef + 1);
 	//////////////////////////////////////////
 	double *ff = create_f(matrix, am_koef);
 	if (!ff)
@@ -83,7 +83,7 @@ int main(int argc, char **argv)
 		return ERR;
 	}
 	//////////////////////////////////////////
-	double *c_koeff = find_c_koeff(c, ff, am_koef);
+	double *c_koeff = find_c_koeff(c, ff, am_koef, matrix);
 	if (!c_koeff)
 	{
 		printf("Memory allocation error!\n");
@@ -98,8 +98,9 @@ int main(int argc, char **argv)
 		printf("X is out of the table, it is too small!\n");
 	else if (j == -2)
 		printf("X is out of the table, it is too big!\n");
-	//float y = find_y(from, to, x, koeff, matrix);
-	//printf("y(%lf) = %lf\n real = y(%lf) = %lf\n", x, y, x, f(x));
+	printf("from = %d to = %d\n", from, to);
+	float y = find_y(from, to, x, koeff, matrix);
+	printf("y(%lf) = %lf\n real = y(%lf) = %lf\n", x, y, x, f(x));
 	if (c != NULL)
 		free_matrix(c, am_koef + 1);
 	if (ff != NULL)
