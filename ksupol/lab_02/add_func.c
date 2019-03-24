@@ -7,7 +7,7 @@
 
 int main(int argc, char **argv)
 {
-	if (argc < 3)
+	if (argc < 2)
 	{
 		printf("Not enough data!\n");
 		return ERR;
@@ -50,17 +50,5 @@ int main(int argc, char **argv)
 	for (double i = from; i <= to; i += step)
 		fprintf(g, "%lf\t%f\n", i, f(i));
 	fclose(g);
-	
-	FILE *j = fopen(argv[2], "w");
-	if (!j)
-	{
-		printf("Couldn't open file!\n");
-		return ERR;
-	}
-	amount = (to - from) / step + 1;
-	fprintf(j, "%d\n", amount);
-	for (double i = from; i <= to; i += step)
-		fprintf(j, "%lf\t%f\n", f(i), i);
-	fclose(j);
 	return 0;
 }
