@@ -68,14 +68,6 @@ double **create_table_c(double **matrix, int n)
 		free_matrix(c, n + 1);
 		return NULL;
 	}
-	for (int i = 0; i < n; i++)
-	{
-		c[0][i] = 0;
-		c[n-1][i] = 0;
-	}
-	c[1][0] = 0;
-	c[1][1] = 0;
-	c[1][2] = 0;
 	for (int i = 2; i < n; i++)
 	{
 		c[i][i - 1] = matrix[i - 1][0] - matrix[i - 2][0];
@@ -97,7 +89,6 @@ double *create_f(double **matrix, int n)
 		return NULL;
 	for (int i = 2; i < n; i++)
 	{
-		printf("i = %d\n", i);
 		double hi = matrix[i][0] - matrix[i - 1][0];
 		double hi1 = matrix[i - 1][0] - matrix[i - 2][0];
 		double yi = matrix[i][1];
@@ -114,7 +105,6 @@ double *create_f(double **matrix, int n)
 
 double *find_c_koeff(double **c, double *f, int n)
 {
-	printf("n = %d\n", n);
 	double *c_koeff = calloc(n + 1, sizeof(double));
 	if (!c_koeff)
 		return NULL;
@@ -124,15 +114,14 @@ double *find_c_koeff(double **c, double *f, int n)
 	double *nn = calloc(n + 1, sizeof(double));
 	if (!nn)
 		return NULL;
-	int m = 1;
 	for (int i = 2; i < n; i++)
 	{
-		double ai = c[i][m];
-		double bi = c[i][m + 1];
-		double di = c[i][m + 2];
+		double ai = c[i][i - 1];
+		double bi = c[i][i];
+		double di = c[i][i + 1];
+		//printf("i = %d ai = %lf bi = %lf di = %lf\n", i, ai, bi, di);
 		kk[i + 1] = di/(bi - ai*kk[i]);
 		nn[i + 1] = (ai*nn[i] + f[i])/(bi - ai*kk[i]);
-		m++;
 	}
 	for (int i = n - 1; i >= 2; i--)
 	{
