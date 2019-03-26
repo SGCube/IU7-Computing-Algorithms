@@ -11,11 +11,11 @@ int cmp_point_x(const void *p1, const void *p2)
     return pa[0] - pb[0];
 }
 
-double **surround(double **plist, double x, int n, int k)
+double **surround(double *xarr, *yarr, double x, int n, int k)
 {
     double **parr = NULL;
     int i = 0;
-    while (i < k && x > plist[i][0])
+    while (i < k && x > xarr[i])
         i++;
     int left = fmax(0, i - (n + 1)/ 2);
     int right = fmin(i + (n + 1)/ 2, k - 1);
@@ -32,8 +32,8 @@ double **surround(double **plist, double x, int n, int k)
     for (int i = left, j = 0; i <= right; i++, j++)
     {
         parr[j] = new double [2];
-        parr[j][0] = plist[i][0];
-        parr[j][1] = plist[i][1];
+        parr[j][0] = xarr[i];
+        parr[j][1] = yarr[i];
     }
     return parr;
 }
@@ -68,10 +68,10 @@ double newton(double x, int n, double **parr)
     return res;
 }
 
-double solve(double **plist, double x, int n, int k)
+double solve(double *xarr, double *yarr, double x, int n, int k)
 {
     qsort(plist, k, sizeof(double *), cmp_point_x);
-    double **parr = surround(plist, x, n, k);
+    double **parr = surround(xarr, yarr, x, n, k);
     if (parr)
         return newton(x, n, parr);
     return -1;
