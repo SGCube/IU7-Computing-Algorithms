@@ -44,7 +44,6 @@ int main(int argc, char **argv)
 	rc = read_from_file(g, &amount, &matrix);
 	if (rc != OK)
 	{
-		printf("rc = %d\n", rc);
 		err_code(rc);
 		fclose(g);
 		return ERR;
@@ -60,53 +59,39 @@ int main(int argc, char **argv)
 	}
 	am_koef = amount;
 	//////////////////////////////////////////
-	koeff = create_table_koeff(matrix, am_koef);
+	koeff = create_table_koeff(matrix, am_koef - 1);
 	if (!koeff)
 	{
 		printf("Memory allocation error!\n");
 		return ERR;
 	}
 	//////////////////////////////////////////
-	c = create_table_c(matrix, am_koef);
+	double *ff = NULL;
+	c = create_table_c(matrix, am_koef - 1, &ff);
 	if (!c)
 	{
 		printf("Memory allocation error!\n");
 		return ERR;
 	}
-	//printf("Diagonal matrix:\n");
-	//print_matrix(c, am_koef + 1, am_koef + 1);
+	double *c_koeff = find_c_koeff(c, ff, am_koef - 1, matrix);
 	//////////////////////////////////////////
-	double *ff = create_f(matrix, am_koef);
-	if (!ff)
-	{
-		printf("Memory allocation error!\n");
-		return ERR;
-	}
-	//////////////////////////////////////////
-	double *c_koeff = find_c_koeff(c, ff, am_koef, matrix);
-	if (!c_koeff)
-	{
-		printf("Memory allocation error!\n");
-		return ERR;
-	}
-	fill_table_koeff(matrix, koeff, c_koeff, am_koef);
-	printf("Matrix with koeff a, b, c, d:\n");
-	print_matrix(koeff, 4, am_koef);
+	fill_table_koeff(matrix, koeff, c_koeff, am_koef - 1);
 	int from = 0, to = 0;
 	int j = find_interval(x, &from, &to, matrix, amount);
 	if (j == -1)
 		printf("X is out of the table, it is too small!\n");
 	else if (j == -2)
 		printf("X is out of the table, it is too big!\n");
-	printf("from = %d to = %d\n", from, to);
 	float y = find_y(from, to, x, koeff, matrix);
-	printf("y(%lf) = %lf\n real = y(%lf) = %lf\n", x, y, x, f(x));
+	printf("\nRESULT:\n\ty(%lf) = %lf\nreal:\ty(%lf) = %lf\n", x, y, x, f(x));
+	if (c_koeff != NULL)
+		free(c_koeff);
 	if (c != NULL)
-		free_matrix(c, am_koef + 1);
+		free_matrix(c, am_koef + 2);
 	if (ff != NULL)
 		free(ff);
 	if (koeff != NULL)
-		free_matrix(koeff, am_koef);
+		free_matrix(koeff, am_koef + 1);
 	if (matrix != NULL)
 		free_matrix(matrix, amount);
 	return OK;

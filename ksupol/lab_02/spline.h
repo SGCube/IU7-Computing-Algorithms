@@ -11,9 +11,7 @@ void sort(int n, double **matrix);
 double **create_table_koeff(double **matrix, int n);
 
 //
-double **create_table_c(double **matrix, int n);
-
-double *create_f(double **matrix, int n);
+double **create_table_c(double **matrix, int n, double **f);
 
 double *find_c_koeff(double **c, double *f, int n, double **matr);
 
