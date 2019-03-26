@@ -10,7 +10,10 @@ ifeq ($(mode), release)
 	CFLAGS += -DNDEBUG -g0
 endif
 
-app.exe: interpol.o array.o matrix.o multidim.o main.o
+app.exe: interpol.o array.o matrix.o multidim.o plist.o main.o
+	$(CC) $^ -o $@
+
+plist.exe: array.o matrix.o plist.o plist_make.o
 	$(CC) $^ -o $@
 
 %.o: %.cpp

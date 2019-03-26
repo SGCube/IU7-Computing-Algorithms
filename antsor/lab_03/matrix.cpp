@@ -7,6 +7,21 @@ Matrix::Matrix()
 	size_y = 0;
 }
 
+Matrix::Matrix(int nx, int ny)
+{
+	matr = new double* [nx];
+	if (!matr)
+		return;
+	double *data = new double[nx * ny];
+	if (!data)
+	{
+		delete [] matr;
+		return;
+	}
+	size_x = nx;
+	size_y = ny;
+}
+
 Matrix::~Matrix()
 {
 	delete [] matr[0];

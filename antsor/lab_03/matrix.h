@@ -10,6 +10,7 @@ struct Matrix
     int size_y;
 
     Matrix();
+    Matrix(int nx, int ny);
     ~Matrix();
 
     void read(FILE *f, int kx, int ky);

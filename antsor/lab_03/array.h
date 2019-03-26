@@ -9,6 +9,7 @@ struct Array
     int size;
 
     Array();
+    Array(int n);
     ~Array();
 
     void read(FILE *f);

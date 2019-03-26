@@ -3,6 +3,7 @@
 #include "array.h"
 #include "matrix.h"
 #include "multidim.h"
+#include "plist.h"
 
 int main(int argc, char **argv)
 {
@@ -48,6 +49,8 @@ int main(int argc, char **argv)
 		return 0;
 	}
 	fclose(f);
+
+	print_plist(&xarr, &yarr, &zmatr);
 
 	printf("Введите x и y: ");
 	double x, y;

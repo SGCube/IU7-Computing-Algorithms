@@ -8,6 +8,14 @@ Array::Array()
     size = 0;
 }
 
+Array::Array(int n)
+{
+    arr = new double[n];
+    if (!arr)
+        return;
+    size = n;
+}
+
 Array::~Array()
 {
     delete [] arr;
