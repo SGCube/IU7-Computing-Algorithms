@@ -23,7 +23,7 @@ Array::~Array()
 
 void Array::read(FILE *f)
 {
-    assert(!f);
+    assert(f);
 
     if (fscanf(f, "%d", &size) != 1 || size < 1)
     {
