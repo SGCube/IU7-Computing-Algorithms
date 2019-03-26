@@ -5,6 +5,6 @@
 #include "matrix.h"
 
 double multidim_interpol(Array *xarr, Array *yarr, Matrix *zmatr,
-                            double x, double y);
+                            double x, double y, int nx, int ny);
 
 #endif
