@@ -7,19 +7,20 @@
 
 int main(int argc, char **argv)
 {
+	setbuf(stdout, NULL);
 	if (argc < 2)
 	{
 		printf("Нет входного файла!\n");
 		return 0;
 	}
-	
+
 	FILE *f = fopen(argv[1], "r");
 	if (!f)
 	{
 		printf("Ошибка открытия файла!\n");
 		return 0;
 	}
-
+	
 	Array xarr = Array(), yarr = Array();
 	xarr.read(f);
 	if (!xarr.arr)
@@ -37,7 +38,7 @@ int main(int argc, char **argv)
 		fclose(f);
 		return 0;
 	}
-
+	
 	Matrix zmatr = Matrix();
 	zmatr.read(f, xarr.size, yarr.size);
 	if (!zmatr.matr)

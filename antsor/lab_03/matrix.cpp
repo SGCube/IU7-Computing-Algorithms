@@ -45,7 +45,7 @@ void Matrix::read(FILE *f, int kx, int ky)
 		matr[i] = &data[i * kx];
 
 	for (int i = 0; i < kx; i++)
-		for (int j = 0; i < ky; j++)
+		for (int j = 0; j < ky; j++)
 			if (fscanf(f, "%lf", &matr[i][j]) != 1)
 			{
 				clear();
