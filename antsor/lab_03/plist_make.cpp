@@ -63,7 +63,6 @@ int main(int argc, char **argv)
         fclose(f);
     }
     
-    
     delete &xarr;
     delete &yarr;
     delete &zmatr;

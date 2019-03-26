@@ -20,7 +20,6 @@ void make_plist(Array *xarr, Array *yarr, Matrix *zmatr,
     for (int i = 0; i < xarr->size; i++)
         for (int j = 0; j < yarr->size; j++)
             zmatr->matr[i][j] = func(xarr->arr[i], yarr->arr[j]);
-    printf("meh!\n");
 }
 
 void print_plist(Array *xarr, Array *yarr, Matrix *zmatr)
