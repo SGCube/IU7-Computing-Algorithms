@@ -54,7 +54,7 @@ void write_plist(FILE *f, Array *xarr, Array *yarr, Matrix *zmatr)
     for (int i = 0; i < xarr->size; i++)
     {
         for (int j = 0; j < yarr->size; j++)
-            fprintf(f, "%lf", zmatr->matr[i][j]);
+            fprintf(f, "%lf ", zmatr->matr[i][j]);
         fprintf(f, "\n");
     }
 }
