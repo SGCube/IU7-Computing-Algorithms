@@ -54,7 +54,7 @@ double **create_table_koeff(double **matrix, int n)
 	data = allocate_matrix(4, n + 2);
 	if (!data)
 		return NULL;
-	for (int i = 0; i > 0; i--)
+	for (int i = n; i > 0; i--)
 		data[0][i] = matrix[i - 1][1];
 	return data;
 }

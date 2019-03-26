@@ -58,6 +58,14 @@ int main(int argc, char **argv)
 		return ERR;
 	}
 	am_koef = amount;
+	if (amount == 2)
+	{
+		double hi = matrix[1][0] - matrix[0][0];
+		double yi = matrix[1][1] - matrix[0][1];
+		double y = matrix[0][1] + yi / hi * (x - matrix[0][0]);
+		printf("\nRESULT:\n\ty(%lf) = %lf\nreal:\ty(%lf) = %lf\n", x, y, x, f(x));
+		return 0;
+	}
 	//////////////////////////////////////////
 	koeff = create_table_koeff(matrix, am_koef - 1);
 	if (!koeff)
