@@ -58,9 +58,11 @@ int main(int argc, char **argv)
         printf("Ошибка открытия/создания файла!\n");
     else
     {
-        write_plist(f, &xarr, &yarr, &zmatr);
         print_plist(&xarr, &yarr, &zmatr);
+        write_plist(f, &xarr, &yarr, &zmatr);
+        fclose(f);
     }
+    
     
     delete &xarr;
     delete &yarr;

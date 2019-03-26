@@ -18,6 +18,8 @@ Matrix::Matrix(int nx, int ny)
 		delete [] matr;
 		return;
 	}
+	for (int i = 0; i < nx; i++)
+		matr[i] = &data[i * nx];
 	size_x = nx;
 	size_y = ny;
 }
@@ -39,6 +41,8 @@ void Matrix::read(FILE *f, int kx, int ky)
 		delete [] matr;
 		return;
 	}
+	for (int i = 0; i < kx; i++)
+		matr[i] = &data[i * kx];
 
 	for (int i = 0; i < kx; i++)
 		for (int j = 0; i < ky; j++)

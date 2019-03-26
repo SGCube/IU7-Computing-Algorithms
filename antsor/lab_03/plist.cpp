@@ -12,28 +12,34 @@ void make_plist(Array *xarr, Array *yarr, Matrix *zmatr,
     xarr->arr[0] = x;
     for (int i = 1; i < xarr->size; i++)
         xarr->arr[i] = xarr->arr[i - 1] + hx;
+    
     yarr->arr[0] = y;
     for (int i = 1; i < yarr->size; i++)
         yarr->arr[i] = yarr->arr[i - 1] + hy;
+
     for (int i = 0; i < xarr->size; i++)
         for (int j = 0; j < yarr->size; j++)
             zmatr->matr[i][j] = func(xarr->arr[i], yarr->arr[j]);
+    printf("meh!\n");
 }
 
 void print_plist(Array *xarr, Array *yarr, Matrix *zmatr)
 {
-    printf("\ty ");
+    printf("%8s│", " ");
     for (int i = 0; i < yarr->size; i++)
-        printf("%lf ", yarr->arr[i]);
-    printf("\nx\t  \n");
+        printf("%8.4lf ", yarr->arr[i]);
+    printf("\n────────┼");
+    for (int i = 0; i < yarr->size; i++)
+        printf("─────────");
+    printf("▶ y\n");
     for (int i = 0; i < xarr->size; i++)
     {
-        printf("%lf\t ", xarr->arr[i]);
+        printf("%-8.4lf│", xarr->arr[i]);
         for (int j = 0; j < yarr->size; j++)
-            printf("%lf ", zmatr->matr[i][j]);
+            printf("%8.4lf ", zmatr->matr[i][j]);
         printf("\n");
     }
-    printf("\n");
+    printf("%8s▼\n%8sx\n", " ", " ");
 }
 
 void write_plist(FILE *f, Array *xarr, Array *yarr, Matrix *zmatr)
