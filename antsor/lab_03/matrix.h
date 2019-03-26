@@ -3,10 +3,18 @@
 
 #include <stdio.h>
 
-void free_matrix(double **a);
+struct Matrix:
+{
+    double **matr;
+    int size_x;
+    int size_y;
 
-double **read_matrix(FILE *f, int kx, int ky);
+    Matrix();
+    ~Matrix();
 
-void print_matrix(double **matrix, int kx, ky);
+    void read(FILE *f, int kx, int ky);
+    void print();
+    void clear();
+};
 
 #endif // MATRIX_H

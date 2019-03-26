@@ -1,32 +1,53 @@
+#include <assert.h>
+
 #include "array.h"
 
-double *read_array(FILE *f, int *n)
+Array::Array()
 {
-    if (!f || !n)
-        return nullptr;
-    
-    int k = 0;
-    if (fscanf(f, "%d", &k) != 1 || k < 1)
-        return nullptr;
-
-    double *arr = new double[k];
-    if (!arr)
-        return nullptr;
-    
-    for (int i = 0; i < k; i++)
-        if (fscanf(f, "%lf", &arr[i]) != 1)
-        {
-            free(arr);
-            return nullptr;
-        }
-
-    *n = k;
-    return arr;
+    arr = nullptr;
+    size = 0;
 }
 
-void print_array(double *arr, int n)
+Array::~Array()
 {
-    for (int i = 0; i < n; i++)
+    delete [] arr;
+}
+
+void Array::read(FILE *f)
+{
+    assert(!f);
+
+    if (fscanf(f, "%d", &size) != 1 || size < 1)
+    {
+        size = 0;
+        return;
+    }
+
+    arr = new double[size];
+    if (!arr)
+    {
+        size = 0;
+        return;
+    }
+    
+    for (int i = 0; i < size; i++)
+        if (fscanf(f, "%lf", &arr[i]) != 1)
+        {
+            clear();
+            return;
+        }
+}
+
+void Array::print()
+{
+    for (int i = 0; i < size; i++)
         printf("%lf ", arr[i]);
     printf("\n");
+}
+
+void Array::clear()
+{
+    delete [] arr;
+    arr = nullptr;
+    size = 0;
 }

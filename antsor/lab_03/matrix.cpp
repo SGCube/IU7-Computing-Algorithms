@@ -1,40 +1,57 @@
 #include "matrix.h"
 
-void free_matrix(double **a)
+Matrix::Matrix()
 {
-	delete [] a[0];
-	delete [] a;
+	matr = nullptr;
+	size_x = 0;
+	size_y = 0;
 }
 
-double **read_matrix(FILE *f, int kx, int ky)
+Matrix::~Matrix()
 {
-	double **marows = new double* [kx];
-	if (!marows)
-		return nullptr;
-	double *matrix = new double[kx * ky];
+	delete [] matr[0];
+	delete [] matr;
+}
+
+void Matrix::read_matrix(FILE *f, int kx, int ky)
+{
+	matrix = new double* [kx];
 	if (!matrix)
+		return;
+	double *data = new double[kx * ky];
+	if (!data)
 	{
-		free(matrix);
-		return nullptr;
+		delete [] matrix;
+		return;
 	}
 
-	double z;
 	for (int i = 0; i < kx; i++)
 		for (int j = 0; i < ky; j++)
 			if (fscanf(f, "%lf", &matrix[i][j]) != 1)
 			{
-				free_matrix(matr);
-				return nullptr;
+				clear();
+				return;
 			}
-	return marows;
+
+	size_x = kx;
+	size_y = ky;
 }
 
-void print_matrix(double **matrix, int kx, int ky)
+void Matrix::print()
 {
-	if (matrix)
-		for (int i = 0; i < kx; i++)
-		{
-			for (int j = 0; i < ky; j++)
-				printf("%.4lf\t", matrix[i][j]);
-		}
+	for (int i = 0; i < size_x; i++)
+	{
+		for (int j = 0; i < size_y; j++)
+			printf("%.4lf\t", matrix[i][j]);
+		printf("\n");
+	}
+}
+
+void clear()
+{
+	delete [] matr[0];
+	delete [] matr;
+	matr = nullptr;
+	size_x = 0;
+	size_y = 0;
 }

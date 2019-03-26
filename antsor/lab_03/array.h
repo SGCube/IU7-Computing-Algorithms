@@ -3,8 +3,17 @@
 
 #include <stdio.h>
 
-double *read_array(FILE *f, int *n);
+struct Array:
+{
+    double *arr;
+    int size;
 
-void print_array(double *arr, int n);
+    Array();
+    ~Array();
+
+    void read(FILE *f);
+    void print();
+    void clear();
+};
 
 #endif
