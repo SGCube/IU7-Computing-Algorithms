@@ -4,8 +4,6 @@
 #include "array.h"
 #include "matrix.h"
 
-double func(double x, double y);
-
 void make_plist(Array *xarr, Array *yarr, Matrix *zmatr,
                 double x, double y, double hx, double hy);
 
