@@ -1,6 +1,6 @@
 #include "matrix.h"
 
-void clear_matrix(double **a)
+void free_matrix(double **a)
 {
 	delete [] a[0];
 	delete [] a;
@@ -23,7 +23,7 @@ double **read_matrix(FILE *f, int kx, int ky)
 		for (int j = 0; i < ky; j++)
 			if (fscanf(f, "%lf", &matrix[i][j]) != 1)
 			{
-				clear_matrix(matr);
+				free_matrix(matr);
 				return nullptr;
 			}
 	return marows;

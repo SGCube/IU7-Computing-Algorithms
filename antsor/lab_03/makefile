@@ -10,7 +10,7 @@ ifeq ($(mode), release)
 	CFLAGS += -DNDEBUG -g0
 endif
 
-app.exe: main.o
+app.exe: array.o matrix.o main.o
 	$(CC) $^ -o $@
 
 %.o: %.cpp
