@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 
-struct Matrix:
+struct Matrix
 {
     double **matr;
     int size_x;

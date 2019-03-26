@@ -32,18 +32,18 @@ int main(int argc, char **argv)
 	if (!yarr.arr)
 	{
 		printf("Ошибка чтения файла (массив y)!\n");
-		delete xarr;
+		delete &xarr;
 		fclose(f);
 		return 0;
 	}
 
 	Matrix zmatr = Matrix();
-	zmatr.read(f);
+	zmatr.read(f, xarr.size, yarr.size);
 	if (!zmatr.matr)
 	{
 		printf("Ошибка чтения файла (матрица z)!\n");
-		delete xarr;
-		delete yarr;
+		delete &xarr;
+		delete &yarr;
 		fclose(f);
 		return 0;
 	}
@@ -54,29 +54,29 @@ int main(int argc, char **argv)
 	if (scanf("%lf%lf", &x, &y) != 2)
 	{
 		printf("Некорректные данные!\n");
-		delete xarr;
-		delete yarr;
-		delete zmatr;
+		delete &xarr;
+		delete &yarr;
+		delete &zmatr;
 		return 0;
 	}
 
 	printf("Введите степени полинома nx и ny: ");
-	int x, y;
+	int nx, ny;
 	if (scanf("%d%d", &nx, &ny) != 2 || nx < 1 || ny < 1)
 	{
 		printf("Некорректные данные!\n");
-		delete xarr;
-		delete yarr;
-		delete zmatr;
+		delete &xarr;
+		delete &yarr;
+		delete &zmatr;
 		return 0;
 	}
 
-	double z = multidim_interpol(xarr, yarr, zmatr, x, y, nx, ny);
+	double z = multidim_interpol(&xarr, &yarr, &zmatr, x, y, nx, ny);
 	printf("\nz(%lf; %lf) = %lf\n", x, y, z);
 
-	delete xarr;
-	delete yarr;
-	delete zmatr;
+	delete &xarr;
+	delete &yarr;
+	delete &zmatr;
 
 	return 0;
 }

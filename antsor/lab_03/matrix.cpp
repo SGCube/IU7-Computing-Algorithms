@@ -13,21 +13,21 @@ Matrix::~Matrix()
 	delete [] matr;
 }
 
-void Matrix::read_matrix(FILE *f, int kx, int ky)
+void Matrix::read(FILE *f, int kx, int ky)
 {
-	matrix = new double* [kx];
-	if (!matrix)
+	matr = new double* [kx];
+	if (!matr)
 		return;
 	double *data = new double[kx * ky];
 	if (!data)
 	{
-		delete [] matrix;
+		delete [] matr;
 		return;
 	}
 
 	for (int i = 0; i < kx; i++)
 		for (int j = 0; i < ky; j++)
-			if (fscanf(f, "%lf", &matrix[i][j]) != 1)
+			if (fscanf(f, "%lf", &matr[i][j]) != 1)
 			{
 				clear();
 				return;
@@ -42,12 +42,12 @@ void Matrix::print()
 	for (int i = 0; i < size_x; i++)
 	{
 		for (int j = 0; i < size_y; j++)
-			printf("%.4lf\t", matrix[i][j]);
+			printf("%.4lf\t", matr[i][j]);
 		printf("\n");
 	}
 }
 
-void clear()
+void Matrix::clear()
 {
 	delete [] matr[0];
 	delete [] matr;

@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 
-struct Array:
+struct Array
 {
     double *arr;
     int size;
