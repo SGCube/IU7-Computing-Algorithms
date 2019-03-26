@@ -66,7 +66,7 @@ int main(int argc, char **argv)
 
 	printf("Введите степени полинома nx и ny: ");
 	int nx, ny;
-	if (scanf("%d%d", &nx, &ny) != 2 || nx < 1 || ny < 1)
+	if (scanf("%d%d", &nx, &ny) != 2 || nx >= xarr.size || ny >= yarr.size)
 	{
 		printf("Некорректные данные!\n");
 		delete &xarr;

@@ -1,5 +1,6 @@
 #include <cmath>
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "interpol.h"
 
@@ -76,8 +77,6 @@ double newton(double x, int n, double **parr)
 
 double solve(double *xarr, double *yarr, double x, int n, int k)
 {
-    qsort(xarr, k, sizeof(double), cmp_double);
-    qsort(yarr, k, sizeof(double), cmp_double);
     double **parr = surround(xarr, yarr, x, n, k);
     if (parr)
         return newton(x, n, parr);
