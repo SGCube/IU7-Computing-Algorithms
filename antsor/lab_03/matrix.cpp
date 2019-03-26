@@ -1,49 +1,40 @@
 #include "matrix.h"
 
-void clear_matrix(double **a, int n)
+void clear_matrix(double **a)
 {
-	for (int i = 0; i < n; i++)
-		delete [] a[i];
-	//delete [] a;
+	delete [] a[0];
+	delete [] a;
 }
 
-double **read_matrix(FILE *f, int *k)
+double **read_matrix(FILE *f, int kx, int ky)
 {
-	double x, y;
-	double **plist = nullptr;
+	double **marows = new double* [kx];
+	if (!marows)
+		return nullptr;
+	double *matrix = new double[kx * ky];
+	if (!matrix)
+	{
+		free(matrix);
+		return nullptr;
+	}
 
-	if (fscanf(f, "%d", k) != 1 || *k < 1)
-		return nullptr;
-	
-	plist = new double* [*k];
-	if (!plist)
-		return nullptr;
-	for (int i = 0; i < *k; i++)
-	{
-		plist[i] = new double [2];
-		if (!plist[i])
-		{
-			clear_matrix(plist, i);
-			return nullptr;
-		}
-	}
-	
-	for (int i = 0; i < *k; i++)
-	{
-		if (fscanf(f, "%lf%lf", &x, &y) != 2)
-		{
-			clear_matrix(plist, *k);
-			return nullptr;
-		}
-		plist[i][0] = x;
-		plist[i][1] = y;
-	}
-	return plist;
+	double z;
+	for (int i = 0; i < kx; i++)
+		for (int j = 0; i < ky; j++)
+			if (fscanf(f, "%lf", &matrix[i][j]) != 1)
+			{
+				clear_matrix(matr);
+				return nullptr;
+			}
+	return marows;
 }
 
-void print_matrix(double **plist, int k)
+void print_matrix(double **matrix, int kx, int ky)
 {
-	if (plist)
-		for (int i = 0; i < k; i++)
-			printf("%.3lf\t|%.3lf\n", plist[i][0], plist[i][1]);
+	if (matrix)
+		for (int i = 0; i < kx; i++)
+		{
+			for (int j = 0; i < ky; j++)
+				printf("%.4lf\t", matrix[i][j]);
+		}
 }
