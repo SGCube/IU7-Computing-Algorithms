@@ -1,6 +1,7 @@
 #include <cmath>
 #include <stdlib.h>
 #include <stdio.h>
+#include <assert.h>
 
 #include "interpol.h"
 
@@ -13,9 +14,9 @@ int cmp_double(const void *p1, const void *p2)
 
 void clear_matrix(double **a, int n)
 {
-	for (int i = 0; i < n; i++)
-		delete [] a[i];
-	//delete [] a;
+    for (int i = 0; i < n; i++)
+	    delete [] a[i];
+	delete [] a;
 }
 
 double **surround(double *xarr, double *yarr, double x, int n, int k)
@@ -47,10 +48,12 @@ double **surround(double *xarr, double *yarr, double x, int n, int k)
 
 double newton(double x, int n, double **parr)
 {
-    double **dy = new double* [n];
+    double **dy = new double* [n + 1];
+    assert(dy);
     for (int i = 0; i < n + 1; i++)
     {
         dy[i] = new double [n + 1];
+        assert(dy[i]);
         dy[i][0] = parr[i][1];
     }
 
@@ -68,10 +71,7 @@ double newton(double x, int n, double **parr)
         xpr *= x - parr[i - 1][0];
         res += dy[0][i] * xpr;
     }
-	
-    clear_matrix(dy, n);
-	clear_matrix(parr, n);
-
+    clear_matrix(dy, n + 1);
     return res;
 }
 
@@ -79,6 +79,10 @@ double solve(double *xarr, double *yarr, double x, int n, int k)
 {
     double **parr = surround(xarr, yarr, x, n, k);
     if (parr)
-        return newton(x, n, parr);
+    {
+        double y = newton(x, n, parr);
+        clear_matrix(parr, n);
+        return y;
+    }
     return -1;
 }
