@@ -10,6 +10,8 @@ ifeq ($(mode), release)
 	CFLAGS += -DNDEBUG -g0
 endif
 
+all: app.exe plist.exe
+
 app.exe: interpol.o array.o matrix.o multidim.o plist.o main.o
 	$(CC) $^ -o $@
 
