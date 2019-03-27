@@ -13,7 +13,8 @@ int main(int argc, char **argv)
 		return ERR;
 	}
 	setbuf(stdout, NULL);
-	int am;
+	int am_x;
+	int am_y;
 	int rc;
 	double from_x;
 	double to_x;
@@ -63,7 +64,7 @@ int main(int argc, char **argv)
 		printf("Wrong point y 'to'!\n");
 		return ERR;
 	}
-	if (from > to_y)
+	if (from_y > to_y)
 	{
 		printf("Point y 'from' is bigger than point 'to'!\n");
 		return ERR;
@@ -75,22 +76,27 @@ int main(int argc, char **argv)
 		printf("Wrong y step!\n");
 		return ERR;
 	}
-	/*
 	FILE *g = fopen(argv[1], "w");
 	if (!g)
 	{
 		printf("Couldn't open file!\n");
 		return ERR;
 	}
-	am = (to - from) / step + 1;
-	fprintf(g, "%d\n", am);
-	double k = from_x;
-	for (int i = 0; i < am; i++)
+	am_x = (to_x - from_x) / step_x + 1;
+	am_y = (to_y - from_y) / step_y + 1;
+	fprintf(g, "%d %d\n", am_x, am_y);
+	double x = from_x;
+	double y = from_y;
+	for (int i = 0; i < am_x; i++)
 	{
-		fprintf(g, "%lf\t%f\n", k, f(k));
-		k += step;
+		for (int j = 0; j < am_y; j++)
+		{
+			fprintf(g, "%lf %lf %lf\n", x, y, f(x, y));
+			y += step_y;
+		}
+		y = from_y;
+		x += step_x;
 	}
 	fclose(g);
-	*/
 	return 0;
 }
