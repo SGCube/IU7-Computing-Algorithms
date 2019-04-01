@@ -58,6 +58,23 @@ void print_matrix(double **matrix, int n, int m)
 	printf("\n");
 }
 
+void printt_matrix(double *m_x, double *m_y, double **m_z, 
+					int n, int m)
+{
+	printf("X|Y\t\t");
+	for (int j = 0; j < m; j++)
+		printf("(%lf)\t", m_y[j]);
+	printf("\n");
+	for (int i = 0; i < n; i++)
+	{
+		printf("(%lf)\t", m_x[i]);
+		for (int j = 0; j < m; j++)
+			printf("%lf\t", m_z[i][j]);
+		printf("\n");
+	}
+	printf("\n");
+}
+
 void free_matrix(double **matrix)
 {
 	free(matrix[0]);

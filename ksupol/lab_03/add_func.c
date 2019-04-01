@@ -20,8 +20,7 @@ int main(int argc, char **argv)
 	double to_x;
 	double from_y;
 	double to_y;
-	double step_x;
-	double step_y;
+	double step;
 	printf("Enter point x 'from': ");
 	rc = scanf("%lf", &from_x);
 	if (rc != 1)
@@ -41,14 +40,6 @@ int main(int argc, char **argv)
 		printf("Point x 'from' is bigger than point 'to'!\n");
 		return ERR;
 	}
-	printf("\nEnter x step: ");
-	rc = scanf("%lf", &step_x);
-	if (rc != 1)
-	{
-		printf("Wrong x step!\n");
-		return ERR;
-	}
-	
 	
 	printf("Enter point y 'from': ");
 	rc = scanf("%lf", &from_y);
@@ -69,11 +60,11 @@ int main(int argc, char **argv)
 		printf("Point y 'from' is bigger than point 'to'!\n");
 		return ERR;
 	}
-	printf("\nEnter y step: ");
-	rc = scanf("%lf", &step_y);
+	printf("\nEnter step: ");
+	rc = scanf("%lf", &step);
 	if (rc != 1)
 	{
-		printf("Wrong y step!\n");
+		printf("Wrong step!\n");
 		return ERR;
 	}
 	FILE *g = fopen(argv[1], "w");
@@ -82,8 +73,8 @@ int main(int argc, char **argv)
 		printf("Couldn't open file!\n");
 		return ERR;
 	}
-	am_x = (to_x - from_x) / step_x + 1;
-	am_y = (to_y - from_y) / step_y + 1;
+	am_x = (to_x - from_x) / step + 1;
+	am_y = (to_y - from_y) / step + 1;
 	fprintf(g, "%d %d\n", am_x, am_y);
 	double x = from_x;
 	double y = from_y;
@@ -92,10 +83,10 @@ int main(int argc, char **argv)
 		for (int j = 0; j < am_y; j++)
 		{
 			fprintf(g, "%lf %lf %lf\n", x, y, f(x, y));
-			y += step_y;
+			y += step;
 		}
 		y = from_y;
-		x += step_x;
+		x += step;
 	}
 	fclose(g);
 	return 0;

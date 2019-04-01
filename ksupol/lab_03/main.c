@@ -28,7 +28,10 @@ int main(int argc, char **argv)
 	int am_x;
 	int am_y;
 	double **matrix = NULL;
-	//double **result_x = NULL;
+	double *m_x = NULL;
+	double *m_y = NULL;
+	double **m_z = NULL;
+	double **result_x = NULL;
 	
 	setbuf(stdout, NULL);
 	if (argc < 2)
@@ -50,11 +53,11 @@ int main(int argc, char **argv)
 		fclose(g);
 		return ERR;
 	}
+	fclose(g);
 	//sort(am_x * am_y, matrix, 0);
 	//sort(am_y * am_y, matrix, 1);
-	printf("\n\tX\t\tY\t\tZ\n");
-	print_matrix(matrix, am_x * am_y, 3);
-	
+	create_x_y(matrix, am_x, am_y, &m_x, &m_y, &m_z);
+	printt_matrix(m_x, m_y, m_z, am_x, am_y);
 	printf("Enter nx: ");
 	rc = scanf("%d", &nx);
 	if (rc != 1 || nx <= 0)
@@ -93,25 +96,44 @@ int main(int argc, char **argv)
 		printf("Wrong x!\n");
 		return ERR;
 	}
-	/*
 	int up, down;
-	int inter = find_interval(n, amount, matrix, x, &up, &down);
+	int inter = find_interval(nx, am_x, m_x, x, &up, &down);
 	if (inter == -1)
 		printf("X is out of the table, it is too small!\n");
 	else if (inter == -2)
 		printf("X is out of the table, it is too big!\n");
-	result_x = diff(matrix, up, down, n);
-	if (!result_x)
+	double *xx = calloc(am_y, sizeof(double));
+	for (int i = 0; i < am_y; i++)
 	{
-		printf("Memory allocation error!");
-		return ERR;
+		result_x = diff(m_z, m_x, up, down, nx, i);
+		if (!result_x)
+		{
+			printf("Memory allocation error!");
+			return ERR;
+		}
+		xx[i] = interpolate(result_x, nx, x, m_x, up);
+		print_matrix(result_x, nx + 1, nx + 1);
 	}
-	double res = interpolate(result_x, n, x, matrix, up);
-	*/
-	double res = 0;
-	printf("\nResult:\tz(%lf, %lf) = %lf\n", x, y, res);
-	printf("True result:\yz(%lf, %lf) = %lf\n", x, y, f(x, y));
-	if (matrix != NULL)
+	inter = find_interval(ny, am_y, m_y, y, &up, &down);
+	if (inter == -1)
+		printf("Y is out of the table, it is too small!\n");
+	else if (inter == -2)
+		printf("Y is out of the table, it is too big!\n");
+	double **result_y = differ(xx, m_y, up, down, ny);
+	printf("last matrix:\n\n");
+	print_matrix(result_y, ny + 1, ny + 1);
+	double res = interpolate(result_y, ny, y, xx, up);
+	printf("\nResult:\t\tz(%lf, %lf) = %lf\n", x, y, res);
+	printf("True result:\tz(%lf, %lf) = %lf\n", x, y, f(x, y));
+	if (m_x)
+		free(m_x);
+	if (m_y)
+		free(m_y);
+	if (matrix)
 		free_matrix(matrix);
+	if (xx)
+		free(xx);
+	if (result_y)
+		free_matrix(result_y);
 	return OK;
 }

@@ -13,4 +13,7 @@ void print_matrix(double **matrix, int n, int m);
 //функция освобождения памяти из-под матрицы
 void free_matrix(double **matrix);
 
+void printt_matrix(double *m_x, double *m_y, double **m_z, 
+					int n, int m);
+
 #endif
