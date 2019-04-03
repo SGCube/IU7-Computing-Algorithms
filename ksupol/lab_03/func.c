@@ -194,15 +194,12 @@ double interpolate(double **result, int n, double x, double *m_x,
 				int up)
 {
 	double res = result[0][0];
-	int p = 0;
-	for (int i = 1; i < n + 1; i++)
-	{
-		double k = x * result[0][i];
-		for (int j = 0; j < p; j++)
-			k *= x - m_x[up + i + j];
-		p++;
-		res += k;
-	}
-	printf("res = %lf\n", res);
+    double a = 1;
+    for (int i = 1; i < n + 1; i++)
+    {
+        a *= x - m_x[up + i - 1];
+        res += a * result[0][i];
+    }
 	return res;
+
 }
