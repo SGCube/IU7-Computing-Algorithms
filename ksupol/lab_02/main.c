@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "spline.h"
+#include "func.h"
 #include "err.h"
 #include "matrix.h"
 #include "function.h"
@@ -44,6 +44,7 @@ int main(int argc, char **argv)
 	rc = read_from_file(g, &amount, &matrix);
 	if (rc != OK)
 	{
+		printf("rc = %d\n", rc);
 		err_code(rc);
 		fclose(g);
 		return ERR;
@@ -57,33 +58,38 @@ int main(int argc, char **argv)
 		printf("Wrong x!\n");
 		return ERR;
 	}
-	am_koef = amount;
-	if (amount == 2)
-	{
-		double hi = matrix[1][0] - matrix[0][0];
-		double yi = matrix[1][1] - matrix[0][1];
-		double y = matrix[0][1] + yi / hi * (x - matrix[0][0]);
-		printf("\nRESULT:\n\ty(%lf) = %lf\nreal:\ty(%lf) = %lf\n", x, y, x, f(x));
-		return 0;
-	}
-	//////////////////////////////////////////
-	koeff = create_table_koeff(matrix, am_koef - 1);
+	am_koef = amount + 1;
+	koeff = create_table_koeff(matrix, am_koef);
 	if (!koeff)
 	{
 		printf("Memory allocation error!\n");
 		return ERR;
 	}
-	//////////////////////////////////////////
-	double *ff = NULL;
-	c = create_table_c(matrix, am_koef - 1, &ff);
+	c = create_table_c(matrix, am_koef);
 	if (!c)
 	{
 		printf("Memory allocation error!\n");
 		return ERR;
 	}
-	double *c_koeff = find_c_koeff(c, ff, am_koef - 1, matrix);
-	//////////////////////////////////////////
-	fill_table_koeff(matrix, koeff, c_koeff, am_koef - 1);
+	printf("Diagonal matrix:\n");
+	print_matrix(c, am_koef + 1, am_koef + 1);
+	double *ff = NULL;
+	ff = create_f(matrix, am_koef);
+	if (!ff)
+	{
+		printf("Memory allocation error!\n");
+		return ERR;
+	}
+	double *c_koeff = NULL;
+	c_koeff = find_c_koeff(c, ff, am_koef);
+	if (!c_koeff)
+	{
+		printf("Memory allocation error!\n");
+		return ERR;
+	}
+	fill_table_koeff(matrix, koeff, c_koeff, am_koef);
+	printf("Matrix with koeff a, b, c, d:\n");
+	print_matrix(koeff, 4, am_koef);
 	int from = 0, to = 0;
 	int j = find_interval(x, &from, &to, matrix, amount);
 	if (j == -1)
@@ -91,15 +97,13 @@ int main(int argc, char **argv)
 	else if (j == -2)
 		printf("X is out of the table, it is too big!\n");
 	float y = find_y(from, to, x, koeff, matrix);
-	printf("\nRESULT:\n\ty(%lf) = %lf\nreal:\ty(%lf) = %lf\n", x, y, x, f(x));
-	if (c_koeff != NULL)
-		free(c_koeff);
+	printf("y(%lf) = %lf\n real = y(%lf) = %lf\n", x, y, x, f(x));
 	if (c != NULL)
-		free_matrix(c, am_koef + 2);
+		free_matrix(c, am_koef + 1);
 	if (ff != NULL)
 		free(ff);
 	if (koeff != NULL)
-		free_matrix(koeff, am_koef + 1);
+		free_matrix(koeff, am_koef);
 	if (matrix != NULL)
 		free_matrix(matrix, amount);
 	return OK;

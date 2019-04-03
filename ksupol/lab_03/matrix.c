@@ -9,12 +9,11 @@
 
 double **allocate_matrix(int n, int m)
 {
-	double **matrix = NULL;
+	double **matrix;
 	matrix = malloc(n * sizeof(double *));
 	if (!matrix)
 		return NULL;
-	double *data = NULL;
-	data = calloc(n * m, sizeof(double));
+	double *data = calloc(n * m, sizeof(double));
 	if (!data)
 	{
 		free(matrix);
@@ -25,14 +24,14 @@ double **allocate_matrix(int n, int m)
 	return matrix;
 }
 
-int read_matrix(double ***matrix, int n, FILE *f)
+int read_matrix(double ***matrix, int am, FILE *f)
 {
 	double rc = 0;
 	int kol = 0;
 	
-	for (int i = 0; i < n; i++)
+	for (int i = 0; i < am; i++)
 	{
-		for (int j = 0; j < 2; j++)
+		for (int j = 0; j < 3; j++)
 		{
 			rc = fscanf(f, "%lf", &(*matrix)[i][j]);
 			if (rc != 1 && rc != EOF)
@@ -43,24 +42,40 @@ int read_matrix(double ***matrix, int n, FILE *f)
 	}
 	if (kol == 0)
 		return NO_MAT;
-	else if (kol < n * 2)
+	else if (kol < am * 3)
 		return NOT_EN;
 	return OK;
 }
 
 void print_matrix(double **matrix, int n, int m)
 {
-	//printf("\nMatrix:\n");
 	for (int i = 0; i < n; i++)
 	{
 		for (int j = 0; j < m; j++)
-			printf("%lf ", matrix[i][j]);
+			printf("%lf\t", matrix[i][j]);
 		printf("\n");
 	}
 	printf("\n");
 }
 
-void free_matrix(double **matrix, int n)
+void printt_matrix(double *m_x, double *m_y, double **m_z, 
+					int n, int m)
+{
+	printf("X|Y\t\t");
+	for (int j = 0; j < m; j++)
+		printf("(%lf)\t", m_y[j]);
+	printf("\n");
+	for (int i = 0; i < n; i++)
+	{
+		printf("(%lf)\t", m_x[i]);
+		for (int j = 0; j < m; j++)
+			printf("%lf\t", m_z[i][j]);
+		printf("\n");
+	}
+	printf("\n");
+}
+
+void free_matrix(double **matrix)
 {
 	free(matrix[0]);
 	free(matrix);
