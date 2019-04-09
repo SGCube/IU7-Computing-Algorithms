@@ -156,13 +156,13 @@ double **solve(double **matrix, int amount, int m)
 {
     int n = m + 1;
     double **id = allocate_matrix(n, n);
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-          id[i][j] = i == j ? 1.0 : 0.0;
-        }
-      }
-      inverse(matrix, id, n);
-      return id;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+          id[i][j] = i == j ? 1 : 0;
+     }
+     inverse(matrix, id, n);
+     return id;
 }
 
 double *mult(double **mat_a, double *col, int am)
