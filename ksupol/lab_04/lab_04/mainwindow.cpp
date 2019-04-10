@@ -103,8 +103,8 @@ void MainWindow::on_show_clicked()
         return;
     }
     double **m;
-    if (n < amount)
-        m = solve(matrix, amount, n);
+    //if (n < amount)
+    m = solve(matrix, amount, n);
     double *c;
     c = mult(m, col, n + 1);
     free(col);
@@ -156,8 +156,8 @@ void MainWindow::print_plot(int n, double *c)
     ui->widget->xAxis->setLabel("x");
     ui->widget->yAxis->setLabel("y");
 
-    ui->widget->xAxis->setRange(table[0][0] - 1, table[amount - 1][0] + 1);
-    ui->widget->yAxis->setRange(min_y - 1, max_y + 1);
+    ui->widget->xAxis->setRange(table[0][0] - 3, table[amount - 1][0] + 3);
+    ui->widget->yAxis->setRange(min_y - 5, max_y + 5);
 
     ui->widget->replot();
 }
