@@ -51,6 +51,12 @@ void draw_plot(QCustomPlot *plot, double **plist, int plist_size,
 	double ymin = vector_min(plot_y);
 	double ymax = vector_max(plot_y);
 	
+	double ytmin = vector_min(table_y);
+	double ytmax = vector_max(table_y);
+	
+	ymin = fmin(ymin, ytmin);
+	ymax = fmax(ymax, ytmax);
+	
     plot->clearGraphs();
 	
 	plot->xAxis->setLabel("x");

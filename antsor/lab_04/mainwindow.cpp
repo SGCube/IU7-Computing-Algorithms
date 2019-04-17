@@ -18,6 +18,13 @@ double func(double x)
 	return pow(x - 5, 3);
 }
 
+int cmp_point_x(const void *p1, const void *p2)
+{
+    double *pa = (double *)p1;
+    double *pb = (double *)p2;
+    return pa[0] - pb[0];
+}
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -28,6 +35,13 @@ MainWindow::MainWindow(QWidget *parent) :
 	plist = NULL;
 	plist_size = 0;
 	n = 0;
+	
+	ui->pointTable->horizontalHeader()->setVisible(true);
+	
+	ui->plot->xAxis->setLabel("x");
+    ui->plot->yAxis->setLabel("y");
+    ui->plot->xAxis->setRange(-1, 1);
+    ui->plot->yAxis->setRange(-1, 1);
 }
 
 MainWindow::~MainWindow()
@@ -38,13 +52,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_loadButton_released()
 {
-	QString str = QFileDialog::getOpenFileName(this, "Открыть файл",
-												   QDir::currentPath(),
-												   "All files (*.*)");
-	if (str == nullptr)
-		return;
-	std::string filestr = str.toStdString();
+	QString fstr = ui->fileEdit->text();
+	std::string filestr = fstr.toStdString();
 	const char *filename = filestr.c_str();
+	
 	FILE *fin = fopen(filename, "r");
 	if (!fin)
 	{
@@ -81,18 +92,28 @@ void MainWindow::on_solveButton_released()
 	}
 	
     double **sle = NULL;
-	double *sle_col = NULL;
-    sle = sle_matrix(plist, plist_size, n, &sle_col);
+	double *sle_col = (double *) calloc(n + 1, sizeof(double));
+	if (!sle_col)
+	{
+		free_matrix(sle, n + 1);
+        QMessageBox::critical(this, "Ошибка", "Ошибка выделения памяти!");
+        return;
+    }
+    sle = sle_matrix(plist, plist_size, n, sle_col);
     if (!sle || !sle_col)
     {
         QMessageBox::critical(this, "Ошибка", "Ошибка выделения памяти!");
         return;
     }
 	
-    double **matrix = NULL;
-    if (n < plist_size)
-        matrix = solve(sle, n);
-    double *cres = multiply(matrix, sle_col, n + 1);
+    double **matrix = solve(sle, n);
+    double *cres = multiply(matrix, sle_col, n);
+	
+	print_matrix(matrix, n + 1, n + 1);
+	
+	for (int i = 0; i < n + 1; i++)
+		printf("%lf ", cres[i]);
+	printf("\n");
 	
     draw_plot(ui->plot, plist, plist_size, cres, n);
 	

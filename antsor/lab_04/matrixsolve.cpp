@@ -115,36 +115,29 @@ double **solve(double **matrix, int n)
 
 double *multiply(double **matrix, double *column, int n)
 {
-    double *res = (double *)calloc(n, sizeof(double));
+    double *res = (double *)calloc(n + 1, sizeof(double));
 	if (!res)
 		return NULL;
-    for (int i = 0; i < n; i++)
-        for (int j = 0; j < n; j++)
+    for (int i = 0; i < n + 1; i++)
+        for (int j = 0; j < n + 1; j++)
             res[i] += matrix[i][j] * column[j];
     return res;
 }
 
-double **sle_matrix(double **plist, int size, int n, double **col)
+double **sle_matrix(double **plist, int size, int n, double *col)
 {
     double **matrix = calloc_matrix(n + 1, n + 1);
     if (!matrix)
         return NULL;
 	
-	*col = (double *) calloc(n + 1, sizeof(double));
-    if (!*col)
-	{
-		clear_matrix(matrix, n + 1);
-        return NULL;
-	}
-	
     for (int m = 0; m < n + 1; m++)
     {
         for (int i = 0; i < size; i++)
         {
-            double t = plist[i][2] * f(plist[i][0], m);
+			double t = plist[i][2] * f(plist[i][0], m);
             for (int k = 0; k < n + 1; k++)
-                matrix[m][k] += t * f(plist[i][0], k);
-            (*col)[m] += t * plist[i][1];
+                matrix[m][k] += f(plist[i][0], k) * t;
+            col[m] += t * plist[i][1];
         }
     }
     return matrix;
