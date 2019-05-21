@@ -3,5 +3,6 @@
 
 double f(double x);
 double df(double x);
+double flog(double x);
 
 #endif

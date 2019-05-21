@@ -13,3 +13,8 @@ double df(double x)
 {
 	return a0/(a1 + a2*x) - (a0 * a2 * x)/pow(a1 + a2*x, 2);
 }
+
+double flog(double x)
+{
+	return log(x);
+}

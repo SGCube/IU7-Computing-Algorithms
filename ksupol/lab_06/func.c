@@ -13,6 +13,7 @@
 #define WR_ELEM -4
 #define NOT_EN 6
 #define NO_SUCH -7
+#define Y 999999999
 
 int read_from_file(FILE *f, int *amount, double ***matrix)
 {
@@ -41,24 +42,25 @@ void one_side(int amount, double **matrix)
 {
 	for (int i = 0; i < amount - 1; i++)
 		matrix[i][2] = (matrix[i+1][1] - matrix[i][1])/(matrix[i+1][0] - matrix[i][0]);
-	matrix[amount - 1][2] = 999999999;
+	matrix[amount - 1][2] = Y;
 }
 
 void increased_accuracy(int am, double **matrix)
 {
 	for (int i = 1; i < am - 1; i++)
-		matrix[i][3] = 999999999;
+		matrix[i][3] = Y;
 	matrix[0][3] = (-3*matrix[0][1] + 4*matrix[1][1] - matrix[2][1])/(matrix[2][0]-matrix[0][0]);
 	matrix[am-1][3] = (3*matrix[am-1][1] - 4*matrix[am-2][1] + matrix[am-3][1])/(matrix[am-1][0]-matrix[am-3][0]);
 }
 
 void central(int am, double **matrix)
 {
-	matrix[0][4] = 999999999;
+	matrix[0][4] = Y;
 	for (int i = 1; i < am - 1; i++)
 		matrix[i][4] = (matrix[i+1][1]-matrix[i-1][1])/(matrix[i+1][0]-matrix[i-1][0]);
-	matrix[am - 1][4] = 999999999;
+	matrix[am - 1][4] = Y;
 }
+
 
 void runge(int am, double **matrix)
 {
@@ -83,4 +85,35 @@ void runge(int am, double **matrix)
 	}
 	free(vector1);
 	free(vector2);
+}
+
+void centrall(int am, double **m)
+{
+	m[0][3] = Y;
+	for (int i = 1; i < am - 1; i++)
+		m[i][3] = (m[i+1][1]-m[i-1][1])/(m[i+1][0]-m[i-1][0]);
+	m[am - 1][3] = Y;
+}
+
+void align(int am, double **matrix)
+{
+	double **new = allocate_matrix(am, 4);
+	if (!new)
+		printf("Memory allocation error!\n");
+	for (int i = 0; i < am; i++)
+	{
+		new[i][0] = matrix[i][0];
+		new[i][1] = flog(matrix[i][1]);
+	}
+	centrall(am, new);
+	matrix[0][6] = Y;
+	for (int i = 1; i < am - 1; i++)
+	{
+		if (matrix[i][0] != 0)
+			matrix[i][6] = new[i][3]*matrix[i][1];
+		else
+			matrix[i][6] = Y;
+	}
+	matrix[am - 1][6] = Y;
+	free_matrix(new, am);
 }

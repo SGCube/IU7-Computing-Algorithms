@@ -6,6 +6,7 @@
 #define ERR_MALLOC 5
 #define NOT_EN 6
 #define NO_MAT 7
+#define Y 999999999
 
 double **allocate_matrix(int n, int m)
 {
@@ -57,7 +58,7 @@ void print_matrix(double **matrix, int n, int m)
 	{
 		for (int j = 0; j < m; j++)
 		{
-			if (matrix[i][j] != 999999999)
+			if (matrix[i][j] != Y)
 				printf("%lf\t", matrix[i][j]);
 			else
 				printf("========\t");
