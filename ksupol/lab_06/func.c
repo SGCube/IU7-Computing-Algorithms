@@ -36,5 +36,11 @@ void real(int amount, double **matrix)
 {
 	for (int i = 0; i < amount; i++)
 		matrix[i][7] = df(matrix[i][0]);
-	return 0;
+}
+void one_side(int amount, double **matrix)
+{
+	// (y(i+1)-y(i))/(x(i+1)-x(i))   или y(i+1)-y(i)/H
+	for (int i = 0; i < amount - 1; i++)
+		matrix[i][2] = (matrix[i+1][1] - matrix[i][1])/(matrix[i+1][0] - matrix[i][0]);
+	matrix[amount - 1][2] = 999999999;
 }
