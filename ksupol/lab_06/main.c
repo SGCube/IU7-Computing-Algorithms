@@ -44,7 +44,9 @@ int main(int argc, char **argv)
 	}
 	increased_accuracy(amount, matrix);
 	one_side(amount, matrix);
+	central(amount, matrix);
 	real(amount, matrix);
+	runge(amount, matrix);
 	print_matrix(matrix, amount, 8);
 	if (matrix)
 		free_matrix(matrix, amount);

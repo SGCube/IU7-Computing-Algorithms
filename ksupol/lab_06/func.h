@@ -8,6 +8,10 @@ void one_side(int amount, double **matrix);
 
 void increased_accuracy(int amount, double **matrix);
 
+void central(int am, double **matrix);
+
+void runge(int am, double **matrix);
+
 //функция подсчета точного результата
 void real(int amount, double **matrix);
 #endif
