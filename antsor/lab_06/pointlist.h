@@ -15,7 +15,7 @@ public:
 	void fill(const Point& p);
 	void clear();
 	
-	size_t size();
+	size_t size() const;
 	Point& operator[](size_t index);
 	const Point& operator[](size_t index) const;
 	

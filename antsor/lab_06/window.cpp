@@ -4,11 +4,17 @@
 #include "window.h"
 #include "ui_window.h"
 
+#include "derivator.h"
+#include "func.hpp"
+
 Window::Window(QWidget *parent) :
 	QMainWindow(parent),
 	ui(new Ui::Window)
 {
 	ui->setupUi(this);
+	
+	ui->xyTable->horizontalHeader()->setVisible(true);
+	ui->resTable->horizontalHeader()->setVisible(true);
 }
 
 Window::~Window()
@@ -30,13 +36,23 @@ void Window::fillTable()
 		
 		ui->xyTable->setItem(i, 0, xitem);
 		ui->xyTable->setItem(i, 1, yitem);
+		
+		ui->resTable->insertRow(i);
+		for (size_t j = 0; j < 6; j++)
+		{
+			QTableWidgetItem *item = new QTableWidgetItem("");
+			ui->resTable->setItem(i, j, item);
+		}
 	}
 }
 
 void Window::clearTable()
 {
 	while (ui->xyTable->rowCount() > 0)
+	{
 		ui->xyTable->removeRow(0);
+		ui->resTable->removeRow(0);
+	}
 }
 
 void Window::on_loadButton_released()
@@ -59,6 +75,43 @@ void Window::on_loadButton_released()
 }
 
 void Window::on_doButton_released()
-{
-    
+{	
+    for (size_t i = 0; i < plist.size(); i++)
+	{
+		double result;
+		
+		if (i == 0)
+			result = Derivator::diff_left(plist, 0);
+		else
+			result = Derivator::diff_right(plist, i);
+		ui->resTable->item(i, 0)->setText(QString::number(result));
+		
+		if (i == 0)
+		{
+			result = Derivator::raise_exp_left(plist);
+			ui->resTable->item(i, 1)->setText(QString::number(result));
+		}
+		else if (i == plist.size() - 1)
+		{
+			result = Derivator::raise_exp_right(plist);
+			ui->resTable->item(i, 1)->setText(QString::number(result));
+		}
+		
+		if (0 < i && i < plist.size() - 1)
+		{
+			result = Derivator::diff_center(plist, i);
+			ui->resTable->item(i, 2)->setText(QString::number(result));
+		}
+		
+		if (i < plist.size() - 2)
+		{
+			result = Derivator::diff_runge(plist, i, 1);
+			ui->resTable->item(i, 3)->setText(QString::number(result));
+		}
+		
+		ui->resTable->item(i, 4)->setText("");
+		
+		result = RealFunc::diff_real(plist[i].x);
+		ui->resTable->item(i, 5)->setText(QString::number(result));
+	}
 }

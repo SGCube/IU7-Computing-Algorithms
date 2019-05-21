@@ -51,7 +51,7 @@ void PointList::clear()
 	size_ = 0;
 }
 
-size_t PointList::size()
+size_t PointList::size() const
 {
 	return size_;
 }

@@ -33,6 +33,7 @@ SOURCES += \
 HEADERS += \
         derivator.h \
         error.hpp \
+        func.hpp \
         point.hpp \
         pointlist.h \
         window.h

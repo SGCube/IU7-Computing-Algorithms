@@ -70,6 +70,9 @@
     <attribute name="horizontalHeaderMinimumSectionSize">
      <number>95</number>
     </attribute>
+    <attribute name="verticalHeaderVisible">
+     <bool>false</bool>
+    </attribute>
     <column>
      <property name="text">
       <string>1</string>
@@ -92,7 +95,7 @@
     </column>
     <column>
      <property name="text">
-      <string>y</string>
+      <string>5</string>
      </property>
     </column>
     <column>
