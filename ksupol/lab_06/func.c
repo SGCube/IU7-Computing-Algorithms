@@ -32,7 +32,7 @@ int read_from_file(FILE *f, int *amount, double ***matrix)
 	return OK;
 }
 
-int real(int amount, double **matrix)
+void real(int amount, double **matrix)
 {
 	for (int i = 0; i < amount; i++)
 		matrix[i][7] = df(matrix[i][0]);

@@ -42,7 +42,7 @@ int main(int argc, char **argv)
 		fclose(g);
 		return ERR;
 	}
-	rc = real(amount, matrix);
+	real(amount, matrix);
 	print_matrix(matrix, amount, 8);
 	if (matrix)
 		free_matrix(matrix, amount);
