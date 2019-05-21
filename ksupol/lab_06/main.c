@@ -42,6 +42,7 @@ int main(int argc, char **argv)
 		fclose(g);
 		return ERR;
 	}
+	increased_accuracy(amount, matrix);
 	one_side(amount, matrix);
 	real(amount, matrix);
 	print_matrix(matrix, amount, 8);

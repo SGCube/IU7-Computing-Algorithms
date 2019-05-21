@@ -44,3 +44,11 @@ void one_side(int amount, double **matrix)
 		matrix[i][2] = (matrix[i+1][1] - matrix[i][1])/(matrix[i+1][0] - matrix[i][0]);
 	matrix[amount - 1][2] = 999999999;
 }
+
+void increased_accuracy(int am, double **matrix)
+{
+	for (int i = 1; i < am - 1; i++)
+		matrix[i][3] = 999999999;
+	matrix[0][3] = (-3*matrix[0][1] + 4*matrix[1][1] - matrix[2][1])/(matrix[2][0]-matrix[0][0]);
+	matrix[am-1][3] = (3*matrix[am-1][1] - 4*matrix[am-2][1] + matrix[am-3][1])/(matrix[am-1][0]-matrix[am-3][0]);
+}
