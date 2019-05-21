@@ -3,6 +3,7 @@
 #include <math.h>
 #include "func.h"
 #include "matrix.h"
+#include "function.h"
 
 #define WR_AM 3
 #define EMPTY 2
@@ -22,11 +23,18 @@ int read_from_file(FILE *f, int *amount, double ***matrix)
 		return EMPTY;
 	if (rc != 1 || *amount <= 0)
 		return WR_AM;
-	*matrix = allocate_matrix(*amount, 2);
+	*matrix = allocate_matrix(*amount, 8);
 	if (!*matrix)
 		return ERR_MALLOC;
 	rc = read_matrix(matrix, *amount, f);
 	if (rc != OK)
 		return rc;
 	return OK;
+}
+
+int real(int amount, double **matrix)
+{
+	for (int i = 0; i < amount; i++)
+		matrix[i][7] = df(matrix[i][0]);
+	return 0;
 }

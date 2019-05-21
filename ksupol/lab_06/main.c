@@ -20,6 +20,7 @@
 int main(int argc, char **argv)
 {
 	int amount = 0;
+	int rc;
 	double **matrix = NULL;
 	setbuf(stdout, NULL);
 	if (argc < 2)
@@ -41,7 +42,8 @@ int main(int argc, char **argv)
 		fclose(g);
 		return ERR;
 	}
-	
+	rc = real(amount, matrix);
+	print_matrix(matrix, amount, 8);
 	if (matrix)
 		free_matrix(matrix, amount);
 	return OK;

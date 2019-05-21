@@ -3,4 +3,7 @@
 
 //функция чтения из файла
 int read_from_file(FILE *f, int *amount, double ***matrix);
+
+//функция подсчета точного результата
+int real(int amount, double **matrix);
 #endif

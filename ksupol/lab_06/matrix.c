@@ -50,10 +50,13 @@ int read_matrix(double ***matrix, int n, FILE *f)
 
 void print_matrix(double **matrix, int n, int m)
 {
+	printf("X\t\tY\t\tOne_sided\tIncr_acc\tCentral\t\tRunge\t\tAlign\t\tReal\n");
+	printf("---------------------------------------------------------------");
+	printf("------------------------------------------------------------\n");
 	for (int i = 0; i < n; i++)
 	{
 		for (int j = 0; j < m; j++)
-			printf("%lf ", matrix[i][j]);
+			printf("%lf\t", matrix[i][j]);
 		printf("\n");
 	}
 	printf("\n");
