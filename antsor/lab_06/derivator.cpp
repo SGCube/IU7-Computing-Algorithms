@@ -19,6 +19,21 @@ double Derivator::runge(double left, double right, double r, int p)
 	return left + (left - right) / pow(r, p - 1);
 }
 
+double Derivator::diff_ksi(double x)
+{
+	return -1 / pow(x, 2);
+}
+
+double Derivator::diff_etta_from_ksi(double x, double a0, double a1)
+{
+	return a1 / a0;
+}
+
+double Derivator::diff_etta_from_y(double y)
+{
+	return -1 / pow(y, 2);
+}
+
 /////////// public ////////////////////////////////////////////////////////////
 
 double Derivator::diff_left(const PointList& plist, size_t i)
@@ -57,9 +72,13 @@ double Derivator::diff_runge(const PointList& plist, size_t i, int p)
 	return runge(right1, right2, r, p);
 }
 
-double Derivator::diff_level(const PointList& plist, size_t i)
+double Derivator::diff_level(const PointList& plist, size_t i, double a0, double a1)
 {
-	return plist[i].x;
+	double ksi = diff_ksi(plist[i].x);
+	double etta_from_ksi = diff_etta_from_ksi(plist[i].x, a0, a1);
+	double etta_from_y = diff_etta_from_y(plist[i].y);
+
+	return (ksi / etta_from_y) * etta_from_ksi;
 }
 
 

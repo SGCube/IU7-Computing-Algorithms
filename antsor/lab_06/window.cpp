@@ -109,7 +109,8 @@ void Window::on_doButton_released()
 			ui->resTable->item(i, 3)->setText(QString::number(result));
 		}
 		
-		ui->resTable->item(i, 4)->setText("");
+		result = Derivator::diff_level(plist, i, RealFunc::a0, RealFunc::a1);
+		ui->resTable->item(i, 4)->setText(QString::number(result));
 		
 		result = RealFunc::diff_real(plist[i].x);
 		ui->resTable->item(i, 5)->setText(QString::number(result));
