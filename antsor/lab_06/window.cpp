@@ -81,9 +81,9 @@ void Window::on_doButton_released()
 		double result;
 		
 		if (i == 0)
-			result = Derivator::diff_left(plist, 0);
+			result = Derivator::diff_right(plist, 0);
 		else
-			result = Derivator::diff_right(plist, i);
+			result = Derivator::diff_left(plist, i);
 		ui->resTable->item(i, 0)->setText(QString::number(result));
 		
 		if (i == 0)
@@ -106,6 +106,11 @@ void Window::on_doButton_released()
 		if (i < plist.size() - 2)
 		{
 			result = Derivator::diff_runge(plist, i, 1);
+			ui->resTable->item(i, 3)->setText(QString::number(result));
+		}
+		else
+		{
+			result = Derivator::diff_runge_l(plist, i, 1);
 			ui->resTable->item(i, 3)->setText(QString::number(result));
 		}
 		

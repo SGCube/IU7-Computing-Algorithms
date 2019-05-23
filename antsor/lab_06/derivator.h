@@ -16,6 +16,7 @@ public:
 	static double raise_exp_right(const PointList& plist);
 	
 	static double diff_runge(const PointList& plist, size_t index, int p);
+	static double diff_runge_l(const PointList& plist, size_t index, int p);
 	static double diff_level(const PointList& plist, size_t i, double a0, double a1);
 	
 private:
@@ -24,7 +25,7 @@ private:
 	static double runge(double left, double right, double r, int p);
 	
 	static double diff_ksi(double x);
-	static double diff_etta_from_ksi(double x, double a0, double a1);
+	static double diff_etta_from_ksi(double a0, double a1);
 	static double diff_etta_from_y(double y);
 };
 
