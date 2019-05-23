@@ -15,6 +15,10 @@
 #define NO_SUCH -7
 #define Y 999999999
 
+#define a0 1
+#define a1 2
+#define a2 3
+
 int read_from_file(FILE *f, int *amount, double ***matrix)
 {
 	int rc;
@@ -95,25 +99,25 @@ void centrall(int am, double **m)
 	m[am - 1][3] = Y;
 }
 
+double ksi(double x)
+{
+	return - 1 / pow(x, 2);
+}
+
+double eta_from_ksi()
+{
+	return a1/a0;
+}
+
+double eta(double y)
+{
+	return -1 / pow(y, 2);
+}
+
 void align(int am, double **matrix)
 {
-	double **new = allocate_matrix(am, 4);
-	if (!new)
-		printf("Memory allocation error!\n");
 	for (int i = 0; i < am; i++)
 	{
-		new[i][0] = matrix[i][0];
-		new[i][1] = flog(matrix[i][1]);
+		matrix[i][6] = ksi(matrix[i][0]) / eta(matrix[i][1]) * eta_from_ksi();
 	}
-	centrall(am, new);
-	matrix[0][6] = Y;
-	for (int i = 1; i < am - 1; i++)
-	{
-		if (matrix[i][0] != 0)
-			matrix[i][6] = new[i][3]*matrix[i][1];
-		else
-			matrix[i][6] = Y;
-	}
-	matrix[am - 1][6] = Y;
-	free_matrix(new, am);
 }

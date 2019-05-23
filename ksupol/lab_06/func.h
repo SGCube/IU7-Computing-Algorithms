@@ -17,4 +17,9 @@ void align(int am, double **matrix);
 
 //функция подсчета точного результата
 void real(int amount, double **matrix);
+
+
+double ksi(double x);
+double eta_from_ksi();
+double eta(double y);
 #endif
