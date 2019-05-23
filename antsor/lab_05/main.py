@@ -11,7 +11,7 @@ Copyright Сорокин Антон, гр. ИУ7-42Б
 """
 
 from physics import atm_to_pascal, pascal_to_atm, F, eps
-from simplemath import dichotomy
+from compute import dichotomy
 
 
 def main():

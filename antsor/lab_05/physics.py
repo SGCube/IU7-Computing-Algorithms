@@ -11,7 +11,7 @@ Copyright Сорокин Антон, гр. ИУ7-42Б
 """
 
 from math import exp, log, fabs
-from simplemath import integrate, dichotomy
+from compute import integrate, dichotomy
 from interp import interpolate
 from solve_snle import gauss
 
