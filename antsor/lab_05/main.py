@@ -13,6 +13,8 @@ Copyright Сорокин Антон, гр. ИУ7-42Б
 from physics import atm_to_pascal, pascal_to_atm, F, eps
 from compute import dichotomy
 
+# from part1_physics import F_part1
+
 
 def main():
     p1 = atm_to_pascal(3)
